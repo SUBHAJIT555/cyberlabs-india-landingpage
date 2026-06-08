@@ -172,6 +172,9 @@ export function WebinarInsightsSection() {
             customVariants={revealVariants}
             className="px-0 py-6 md:px-8 md:py-8"
           >
+
+
+            
             <p className="text-sm leading-relaxed text-zinc-800 md:text-base">
               As demand continues to grow across{" "}
               {markets.map((market, index) => (
