@@ -120,10 +120,10 @@ export function WhyCyberlabsSection() {
                         key={item}
                         className="flex items-start gap-2.5 rounded-lg border border-transparent px-1 py-1 transition-colors hover:border-zinc-100 hover:bg-zinc-50/80"
                       >
-                        <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-emerald-50 text-xs text-emerald-600">
-                          ✔
+                        <span className="mt-0.5 flex h-3 w-3 shrink-0 items-center justify-center bg-emerald-500 rounded text-xs text-emerald-600">
+                          
                         </span>
-                        <span className="text-sm leading-snug text-zinc-700">
+                        <span className="text-sm lg:text-base leading-snug text-zinc-700">
                           {item}
                         </span>
                       </li>
@@ -134,15 +134,27 @@ export function WhyCyberlabsSection() {
             </TimelineContent>
 
             <TimelineContent
-              as="p"
+              as="div"
               animationNum={11}
               timelineRef={timelineRef}
               customVariants={revealVariants}
-              className="mt-6 border border-dashed border-zinc-200 bg-white px-5 py-4 text-sm leading-relaxed text-zinc-600 md:text-base"
+              className="relative mt-6 overflow-hidden border border-dashed border-neutral-200 bg-neutral-50 px-5 py-4"
             >
-              At CYBERLABS, we don&apos;t simply teach cybersecurity. We help
-              professionals understand the industry, identify opportunities,
-              build relevant skills, and develop successful long-term careers.
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 z-0"
+                style={{
+                  backgroundImage:
+                    "repeating-linear-gradient(45deg, #e5e5e5 0, #e5e5e5 1px, transparent 0, transparent 50%), repeating-linear-gradient(-45deg, #e5e5e5 0, #e5e5e5 1px, transparent 0, transparent 50%)",
+                  backgroundSize: "6px 6px",
+                  opacity: 0.4,
+                }}
+              />
+              <p className="relative z-10 text-sm leading-relaxed text-zinc-600 md:text-base">
+                At CYBERLABS, we don&apos;t simply teach cybersecurity. We help
+                professionals understand the industry, identify opportunities,
+                build relevant skills, and develop successful long-term careers.
+              </p>
             </TimelineContent>
           </div>
 

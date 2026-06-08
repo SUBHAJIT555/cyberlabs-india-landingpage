@@ -258,7 +258,7 @@ export function WebinarScheduleSection() {
           animationNum={5}
           timelineRef={timelineRef}
           customVariants={revealVariants}
-          className="mt-5 overflow-hidden border border-zinc-500 bg-white border-dotted"
+          className="mt-5 overflow-hidden border border-zinc-300 bg-white border-dotted"
         >
           <div className="hidden border-b border-zinc-200 bg-zinc-50/80 md:grid md:grid-cols-[7.5rem_6.5rem_minmax(0,1fr)_8.5rem] md:gap-6 md:px-6">
             <div className="py-3.5 text-xs font-semibold uppercase tracking-[0.12em] text-zinc-500">

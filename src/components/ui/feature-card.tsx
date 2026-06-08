@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 type FeatureType = {
   title: string;
-  icon: string;
+  icon: React.ReactNode;
 };
 
 type FeatureCardProps = React.ComponentProps<"div"> & {
@@ -41,8 +41,10 @@ export function FeatureCard({ feature, className, ...props }: FeatureCardProps) 
       </div>
 
       <div className="relative z-10 flex flex-1 flex-col">
-        <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl text-xl transition duration-300 group-hover:border-zinc-300 group-hover:bg-white">
-          <span aria-hidden>{feature.icon}</span>
+        <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl text-zinc-700 transition duration-300 group-hover:border-zinc-300 group-hover:bg-white">
+          <span aria-hidden className="flex h-8 w-8 items-center justify-center [&_svg]:h-8 [&_svg]:w-8">
+            {feature.icon}
+          </span>
         </div>
 
         <h3 className="relative z-20 mt-8 text-sm font-semibold text-zinc-900 md:text-base lg:text-xl!">

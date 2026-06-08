@@ -11,14 +11,14 @@ const PROS_IMAGE =
   "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1400&auto=format&fit=crop";
 
 const expertiseAreas = [
-  { label: "Cyber Defense", icon: "🛡️" },
-  { label: "Cyber Intelligence", icon: "🛰️" },
-  { label: "Digital Investigations", icon: "🔎" },
-  { label: "Security Operations", icon: "🖥️" },
-  { label: "Cybercrime Analysis", icon: "🕵️" },
-  { label: "Platform Security", icon: "🔐" },
-  { label: "Threat Intelligence", icon: "📡" },
-  { label: "Risk & Security Leadership", icon: "🎯" },
+  { label: "Cyber Defense", icon: <ShieldLockIcon /> },
+  { label: "Cyber Intelligence", icon: <RadarIcon /> },
+  { label: "Digital Investigations", icon: <VirusSearchIcon /> },
+  { label: "Security Operations", icon: <DeviceImacCodeIcon /> },
+  { label: "Cybercrime Analysis", icon: <SpyIcon /> },
+  { label: "Platform Security", icon: <LockSearchIcon /> },
+  { label: "Threat Intelligence", icon: <SatelliteIcon /> },
+  { label: "Risk & Security Leadership", icon: <CurrencyIcon /> },
 ];
 
 const understandings = [
@@ -45,6 +45,210 @@ const revealVariants = {
     opacity: 0,
   },
 };
+
+function ShieldLockIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-4 w-4 sm:h-[18px] sm:w-[18px]"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" />
+      <path d="M11 11a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+      <path d="M12 12l0 2.5" />
+    </svg>
+  );
+}
+
+function RadarIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-4 w-4 sm:h-[18px] sm:w-[18px]"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M21 12h-8a1 1 0 1 0 -1 1v8a9 9 0 0 0 9 -9" />
+      <path d="M16 9a5 5 0 1 0 -7 7" />
+      <path d="M20.486 9a9 9 0 1 0 -11.482 11.495" />
+    </svg>
+  );
+}
+
+function VirusSearchIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-4 w-4 sm:h-[18px] sm:w-[18px]"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M17 12a5 5 0 1 0 -5 5" />
+      <path d="M12 7v-4" />
+      <path d="M11 3h2" />
+      <path d="M15.536 8.464l2.828 -2.828" />
+      <path d="M17.657 4.929l1.414 1.414" />
+      <path d="M17 12h4" />
+      <path d="M21 11v2" />
+      <path d="M12 17v4" />
+      <path d="M13 21h-2" />
+      <path d="M8.465 15.536l-2.829 2.828" />
+      <path d="M6.343 19.071l-1.413 -1.414" />
+      <path d="M7 12h-4" />
+      <path d="M3 13v-2" />
+      <path d="M8.464 8.464l-2.828 -2.828" />
+      <path d="M4.929 6.343l1.414 -1.413" />
+      <path d="M15 17.5a2.5 2.5 0 1 0 5 0a2.5 2.5 0 1 0 -5 0" />
+      <path d="M19.5 19.5l2.5 2.5" />
+    </svg>
+  );
+}
+
+function DeviceImacCodeIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-4 w-4 sm:h-[18px] sm:w-[18px]"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M11.5 17h-7.5a1 1 0 0 1 -1 -1v-12a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v9" />
+      <path d="M3 13h18" />
+      <path d="M8 21h3.5" />
+      <path d="M10 17l-.5 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  );
+}
+
+function SpyIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-4 w-4 sm:h-[18px] sm:w-[18px]"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M3 11h18" />
+      <path d="M5 11v-4a3 3 0 0 1 3 -3h8a3 3 0 0 1 3 3v4" />
+      <path d="M4 17a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+      <path d="M14 17a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+      <path d="M10 17h4" />
+    </svg>
+  );
+}
+
+function LockSearchIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-4 w-4 sm:h-[18px] sm:w-[18px]"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M11.5 21h-4.5a2 2 0 0 1 -2 -2v-6a2 2 0 0 1 2 -2h10" />
+      <path d="M8 11v-4a4 4 0 1 1 8 0v4" />
+      <path d="M15 18a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+      <path d="M20.2 20.2l1.8 1.8" />
+    </svg>
+  );
+}
+
+function SatelliteIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-4 w-4 sm:h-[18px] sm:w-[18px]"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M3.707 6.293l2.586 -2.586a1 1 0 0 1 1.414 0l5.586 5.586a1 1 0 0 1 0 1.414l-2.586 2.586a1 1 0 0 1 -1.414 0l-5.586 -5.586a1 1 0 0 1 0 -1.414" />
+      <path d="M6 10l-3 3l3 3l3 -3" />
+      <path d="M10 6l3 -3l3 3l-3 3" />
+      <path d="M12 12l1.5 1.5" />
+      <path d="M14.5 17a2.5 2.5 0 0 0 2.5 -2.5" />
+      <path d="M15 21a6 6 0 0 0 6 -6" />
+    </svg>
+  );
+}
+
+function CurrencyIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-4 w-4 sm:h-[18px] sm:w-[18px]"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M5 12a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+      <path d="M4 4l3 3" />
+      <path d="M20 4l-3 3" />
+      <path d="M4 20l3 -3" />
+      <path d="M20 20l-3 -3" />
+    </svg>
+  );
+}
+
+function PointerCollaborationIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-5 w-5"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10.987 13.943l1.957 5.016c.563 1.445 2.633 1.367 3.087 -.116l3.895 -12.727c.384 -1.253 -.79 -2.426 -2.042 -2.042l-12.727 3.895c-1.483 .454 -1.56 2.524 -.116 3.087l5.017 1.957c.426 .166 .763 .503 .929 .93" />
+      <path d="M9 20l-1.064 -3.151a1.25 1.25 0 0 0 -.785 -.785l-3.151 -1.064" />
+    </svg>
+  );
+}
 
 export function LearnFromProsSection() {
   const timelineRef = useRef<HTMLDivElement>(null);
@@ -117,7 +321,12 @@ export function LearnFromProsSection() {
               transition={{ duration: 0.15 }}
               className="inline-flex items-center gap-1.5 rounded-lg border border-dotted border-zinc-200 bg-white px-2.5 py-1.5 text-xs font-medium text-zinc-700 shadow-sm transition-colors hover:border-zinc-300 sm:gap-2 sm:px-4 sm:py-2 sm:text-sm"
             >
-              <span className="text-sm leading-none sm:text-base">{area.icon}</span>
+              <span
+                aria-hidden
+                className="flex shrink-0 items-center justify-center text-zinc-600"
+              >
+                {area.icon}
+              </span>
               {area.label}
             </motion.span>
           ))}
@@ -140,8 +349,11 @@ export function LearnFromProsSection() {
               <ul className="mt-5 space-y-3">
                 {understandings.map((item) => (
                   <li key={item} className="flex items-start gap-3">
-                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-emerald-50 text-sm text-emerald-600">
-                      ✔
+                    <span
+                      aria-hidden
+                      className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center text-emerald-600"
+                    >
+                      <PointerCollaborationIcon />
                     </span>
                     <span className="text-sm leading-relaxed text-zinc-700 md:text-base">
                       {item}

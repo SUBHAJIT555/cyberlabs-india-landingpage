@@ -27,54 +27,220 @@ const revealVariants = {
 
 const skills = [
   {
-    icon: "🛡️",
+    icon: <NetworkSecurityIcon />,
     title: "Network Security",
     description:
       "Understanding firewalls, VPNs, IDS/IPS, and network monitoring.",
   },
   {
-    icon: "🧪",
+    icon: <PenetrationTestingIcon />,
     title: "Penetration Testing",
     description:
       "Using tools like Nmap, Metasploit, and Burp Suite to identify vulnerabilities.",
   },
   {
-    icon: "📊",
+    icon: <SiemToolsIcon />,
     title: "SIEM Tools",
     description:
       "Experience with security monitoring platforms such as Splunk, IBM QRadar, or Microsoft Sentinel.",
   },
   {
-    icon: "🔍",
+    icon: <VulnerabilityAssessmentIcon />,
     title: "Vulnerability Assessment",
     description:
       "Using tools like Nessus or OpenVAS to detect security weaknesses.",
   },
   {
-    icon: "🚨",
+    icon: <DigitalForensicsIcon />,
     title: "Digital Forensics & Incident Response",
     description:
       "Investigating security breaches and analyzing logs and evidence.",
   },
   {
-    icon: "🐍",
+    icon: <ProgrammingScriptingIcon />,
     title: "Programming & Scripting",
     description:
       "Knowledge of Python, Bash, or PowerShell for automation and security testing.",
   },
   {
-    icon: "💻",
+    icon: <OperatingSystemsSecurityIcon />,
     title: "Operating Systems Security",
     description:
       "Securing and managing Linux, Windows, and server environments.",
   },
   {
-    icon: "☁️",
+    icon: <CloudSecurityIcon />,
     title: "Cloud Security",
     description:
       "Understanding security practices for platforms like AWS, Microsoft Azure, or Google Cloud Platform (GCP).",
   },
 ];
+
+function NetworkSecurityIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" />
+      <path d="M11 11a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+      <path d="M12 12l0 2.5" />
+    </svg>
+  );
+}
+
+function PenetrationTestingIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M11 12a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+      <path d="M12 7a5 5 0 1 0 5 5" />
+      <path d="M13 3.055a9 9 0 1 0 7.941 7.945" />
+      <path d="M15 6v3h3l3 -3h-3v-3l-3 3" />
+      <path d="M15 9l-3 3" />
+    </svg>
+  );
+}
+
+function SiemToolsIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M3 7a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+      <path d="M7 3v4h4" />
+      <path d="M9 17l0 4" />
+      <path d="M17 14l0 7" />
+      <path d="M13 13l0 8" />
+      <path d="M21 12l0 9" />
+    </svg>
+  );
+}
+
+function VulnerabilityAssessmentIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M11 15a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+      <path d="M18.5 18.5l2.5 2.5" />
+      <path d="M4 6h16" />
+      <path d="M4 12h4" />
+      <path d="M4 18h4" />
+    </svg>
+  );
+}
+
+function DigitalForensicsIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M9 11a3 3 0 0 1 6 0c0 1.657 .612 3.082 1 4" />
+      <path d="M12 11v1.75c-.001 1.11 .661 2.206 1 3.25" />
+      <path d="M9 14.25c.068 .58 .358 1.186 .5 1.75" />
+      <path d="M4 8v-2a2 2 0 0 1 2 -2h2" />
+      <path d="M4 16v2a2 2 0 0 0 2 2h2" />
+      <path d="M16 4h2a2 2 0 0 1 2 2v2" />
+      <path d="M16 20h2a2 2 0 0 0 2 -2v-2" />
+    </svg>
+  );
+}
+
+function ProgrammingScriptingIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M7 8l-4 4l4 4" />
+      <path d="M17 8l4 4l-4 4" />
+      <path d="M14 4l-4 16" />
+    </svg>
+  );
+}
+
+function OperatingSystemsSecurityIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M3 7a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v2a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3v-2" />
+      <path d="M3 15a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v2a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3l0 -2" />
+      <path d="M7 8l0 .01" />
+      <path d="M7 16l0 .01" />
+      <path d="M11 8h6" />
+      <path d="M11 16h6" />
+    </svg>
+  );
+}
+
+function CloudSecurityIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M19 18a3.5 3.5 0 0 0 0 -7h-1c.397 -1.768 -.285 -3.593 -1.788 -4.787c-1.503 -1.193 -3.6 -1.575 -5.5 -1s-3.315 2.019 -3.712 3.787c-2.199 -.088 -4.155 1.326 -4.666 3.373c-.512 2.047 .564 4.154 2.566 5.027" />
+      <path d="M8 16a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1v3a1 1 0 0 1 -1 1h-6a1 1 0 0 1 -1 -1l0 -3" />
+      <path d="M10 15v-2a2 2 0 1 1 4 0v2" />
+    </svg>
+  );
+}
 
 export function HeroSection() {
   const timelineRef = useRef<HTMLDivElement>(null);
@@ -191,7 +357,6 @@ export function HeroSection() {
             </div>
           </TimelineContent>
         </article>
-
       </div>
     </section>
   );

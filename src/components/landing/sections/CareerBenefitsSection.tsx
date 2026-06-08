@@ -17,13 +17,13 @@ const careerBenefits = [
 ];
 
 const bootCampAreas = [
-  { label: "AI Security", icon: "🤖" },
-  { label: "Threat Hunting", icon: "🎯" },
-  { label: "Detection Engineering", icon: "🛠️" },
-  { label: "Cyber Intelligence", icon: "🛰️" },
-  { label: "Digital Investigations", icon: "🔎" },
-  { label: "Platform Security", icon: "🔐" },
-  { label: "Security Operations", icon: "🖥️" },
+  { label: "AI Security", icon: <CodeAiIcon /> },
+  { label: "Threat Hunting", icon: <Radar2Icon /> },
+  { label: "Detection Engineering", icon: <SettingsBoltIcon /> },
+  { label: "Cyber Intelligence", icon: <Cube3dSphereIcon /> },
+  { label: "Digital Investigations", icon: <FingerprintIcon /> },
+  { label: "Platform Security", icon: <ShieldCodeIcon /> },
+  { label: "Security Operations", icon: <ActivityHeartbeatIcon /> },
 ];
 
 const bootCampGoals = [
@@ -70,6 +70,181 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
   );
 }
 
+const bootCampIconClass = "h-4 w-4 sm:h-[18px] sm:w-[18px]";
+
+function CodeAiIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={bootCampIconClass}
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M7 8l-4 4l4 4" />
+      <path d="M17 8l3.111 3.111" />
+      <path d="M14 4l-2.175 8.7" />
+      <path d="M14 21v-4a2 2 0 1 1 4 0v4" />
+      <path d="M14 19h4" />
+      <path d="M21 15v6" />
+    </svg>
+  );
+}
+
+function Radar2Icon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={bootCampIconClass}
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M11 12a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+      <path d="M15.51 15.56a5 5 0 1 0 -3.51 1.44" />
+      <path d="M18.832 17.86a9 9 0 1 0 -6.832 3.14" />
+      <path d="M12 12v9" />
+    </svg>
+  );
+}
+
+function SettingsBoltIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={bootCampIconClass}
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M13.256 20.473c-.855 .907 -2.583 .643 -2.931 -.79a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.07 .26 1.488 1.29 1.254 2.15" />
+      <path d="M19 16l-2 3h4l-2 3" />
+      <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+    </svg>
+  );
+}
+
+function Cube3dSphereIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={bootCampIconClass}
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M6 17.6l-2 -1.1v-2.5" />
+      <path d="M4 10v-2.5l2 -1.1" />
+      <path d="M10 4.1l2 -1.1l2 1.1" />
+      <path d="M18 6.4l2 1.1v2.5" />
+      <path d="M20 14v2.5l-2 1.12" />
+      <path d="M14 19.9l-2 1.1l-2 -1.1" />
+      <path d="M12 12l2 -1.1" />
+      <path d="M18 8.6l2 -1.1" />
+      <path d="M12 12l0 2.5" />
+      <path d="M12 18.5l0 2.5" />
+      <path d="M12 12l-2 -1.12" />
+      <path d="M6 8.6l-2 -1.1" />
+    </svg>
+  );
+}
+
+function FingerprintIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={bootCampIconClass}
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M18.9 7a8 8 0 0 1 1.1 5v1a6 6 0 0 0 .8 3" />
+      <path d="M8 11a4 4 0 0 1 8 0v1a10 10 0 0 0 2 6" />
+      <path d="M12 11v2a14 14 0 0 0 2.5 8" />
+      <path d="M8 15a18 18 0 0 0 1.8 6" />
+      <path d="M4.9 19a22 22 0 0 1 -.9 -7v-1a8 8 0 0 1 12 -6.95" />
+    </svg>
+  );
+}
+
+function ShieldCodeIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={bootCampIconClass}
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 21a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3a12 12 0 0 0 8.5 3a12 12 0 0 1 -.078 7.024" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  );
+}
+
+function ActivityHeartbeatIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={bootCampIconClass}
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M3 12h4.5l1.5 -6l4 12l2 -9l1.5 3h4.5" />
+    </svg>
+  );
+}
+
+function ArrowNarrowRightDashedIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-5 w-5"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M5 12h.5m3 0h1.5m3 0h6" />
+      <path d="M15 16l4 -4" />
+      <path d="M15 8l4 4" />
+    </svg>
+  );
+}
+
 function SplitChecklist({
   items,
   timelineRef,
@@ -100,8 +275,11 @@ function SplitChecklist({
                   rowIndex !== column.length - 1 && "border-b border-zinc-200",
                 )}
               >
-                <span className="mt-0.5 text-emerald-600 transition-transform group-hover:scale-110">
-                  ✔
+                <span
+                  aria-hidden
+                  className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center text-emerald-600 transition-transform group-hover:translate-x-0.5 group-hover:scale-110"
+                >
+                  <ArrowNarrowRightDashedIcon />
                 </span>
                 <span className="text-sm leading-relaxed text-zinc-700 transition-colors group-hover:text-zinc-900 md:text-base">
                   {item}
@@ -243,7 +421,12 @@ export function CareerBenefitsSection() {
               transition={{ duration: 0.15 }}
               className="inline-flex items-center gap-1.5 rounded-lg border border-dotted border-zinc-200 bg-white px-2.5 py-1.5 text-xs font-medium text-zinc-700 shadow-sm transition-colors hover:border-zinc-300 sm:gap-2 sm:px-4 sm:py-2 sm:text-sm"
             >
-              <span className="text-sm leading-none sm:text-base">{area.icon}</span>
+              <span
+                aria-hidden
+                className="flex shrink-0 items-center justify-center text-zinc-600"
+              >
+                {area.icon}
+              </span>
               {area.label}
             </motion.span>
           ))}

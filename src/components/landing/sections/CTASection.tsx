@@ -91,7 +91,7 @@ export function WhyChooseCTASection() {
             <div className="mt-8 flex justify-center">
               <ShinyButton
                 onClick={() => openRegistration()}
-                className="shiny-cta rounded-2xl! shadow-lg! shadow-zinc-800/20!"
+                className="shiny-cta rounded-2xl! shadow-lg! shadow-zinc-800/20! text-sm!"
               >
                 REGISTER FOR THE NEXT WEBINAR
               </ShinyButton>

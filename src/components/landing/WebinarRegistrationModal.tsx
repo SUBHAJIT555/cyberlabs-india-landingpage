@@ -55,7 +55,7 @@ const initialFormState: FormState = {
 };
 
 const inputClassName =
-  "w-full rounded-xl border border-dashed border-zinc-200 bg-zinc-50/60 px-3.5 py-2.5 text-sm text-zinc-900 outline-none transition placeholder:text-zinc-400 focus:border-zinc-400 focus:bg-white focus:ring-2 focus:ring-zinc-200/80";
+  "w-full rounded-sm border border-dashed border-zinc-300 bg-zinc-50 px-3.5 py-2.5 text-sm text-zinc-900 outline-none transition placeholder:text-zinc-400 focus:border-zinc-400 focus:bg-white focus:ring-2 focus:ring-zinc-200/80";
 
 const labelClassName =
   "mb-2 block text-xs font-semibold uppercase tracking-[0.12em] text-zinc-500";
@@ -87,25 +87,18 @@ function useIsMobile(breakpoint = 640) {
   return isMobile;
 }
 
-function ModalLineBackground() {
+function ModalPatternBackground() {
   return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-      <div
-        style={{
-          WebkitMaskImage: "linear-gradient(to top, #000 0%, transparent 75%)",
-          backgroundImage:
-            "linear-gradient(90deg, #d4d4d8 1px, transparent 1px)",
-          backgroundSize: "8px 100%",
-          height: "100%",
-          left: "0",
-          maskImage: "linear-gradient(to top, #000 0%, transparent 75%)",
-          opacity: 0.45,
-          position: "absolute",
-          top: "0",
-          width: "100%",
-        }}
-      />
-    </div>
+    <div
+      aria-hidden
+      className="pointer-events-none absolute inset-0 z-0"
+      style={{
+        backgroundImage:
+          "repeating-linear-gradient(45deg, #e5e5e5 0, #e5e5e5 1px, transparent 0, transparent 50%), repeating-linear-gradient(-45deg, #e5e5e5 0, #e5e5e5 1px, transparent 0, transparent 50%)",
+        backgroundSize: "5px 5px",
+        opacity: 0.55,
+      }}
+    />
   );
 }
 
@@ -121,7 +114,7 @@ function FormSection({
   return (
     <section
       className={cn(
-        "rounded-2xl border border-dashed border-zinc-200 bg-white/80 p-4 sm:p-5",
+        "border border-dotted border-zinc-300 bg-neutral-100 p-4 sm:p-5 rounded-xl ",
         className,
       )}
     >
@@ -135,6 +128,49 @@ function FormSection({
 
 function RequiredMark() {
   return <span className="text-blue-500">*</span>;
+}
+
+function GenderMaleIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-4 w-4"
+      aria-hidden
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M5 14a5 5 0 1 0 10 0a5 5 0 1 0 -10 0" />
+      <path d="M19 5l-5.4 5.4" />
+      <path d="M19 5h-5" />
+      <path d="M19 5v5" />
+    </svg>
+  );
+}
+
+function GenderFemaleIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-4 w-4"
+      aria-hidden
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M7 9a5 5 0 1 0 10 0a5 5 0 1 0 -10 0" />
+      <path d="M12 14v7" />
+      <path d="M9 18h6" />
+    </svg>
+  );
 }
 
 export function WebinarRegistrationModal({
@@ -267,12 +303,12 @@ export function WebinarRegistrationModal({
                 : { opacity: 0, y: 20, scale: 0.98 }
             }
             transition={panelSpring}
-            className="relative z-10 flex h-dvh w-full max-w-none flex-col overflow-hidden rounded-none border-0 bg-white sm:h-auto sm:max-h-[min(88dvh,860px)] sm:max-w-2xl sm:rounded-3xl sm:border sm:border-dashed sm:border-zinc-300 sm:shadow-2xl sm:shadow-zinc-900/10"
+            className="relative z-10 flex h-dvh w-full max-w-none flex-col overflow-hidden rounded-none border-0 bg-neutral-50 sm:h-auto sm:max-h-[min(88dvh,860px)] sm:max-w-2xl sm:rounded-3xl sm:border sm:border-dashed sm:border-neutral-200 sm:shadow-2xl sm:shadow-zinc-900/10"
           >
-            <div className="relative shrink-0 border-b border-dashed border-zinc-200 bg-zinc-50/80 px-5 pb-5 pt-[max(1.25rem,env(safe-area-inset-top))] sm:px-6 sm:pt-6">
-              <ModalLineBackground />
+            <ModalPatternBackground />
 
-              <div className="relative z-10 flex items-start justify-between gap-4">
+            <div className="relative z-10 shrink-0 border-b border-dashed border-zinc-200 px-5 pb-5 pt-[max(1.25rem,env(safe-area-inset-top))] sm:px-6 sm:pt-6">
+              <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0 flex-1">
                   <span className="inline-flex items-center gap-2 rounded-lg border border-dotted border-zinc-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] shadow-sm">
                     <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
@@ -302,24 +338,16 @@ export function WebinarRegistrationModal({
                   </h2>
 
                   {activeWebinar ? (
-                    <div className="mt-4 flex flex-wrap items-center gap-2">
+                    <div className="mt-3 flex flex-wrap items-center gap-1.5 sm:mt-4 sm:gap-2">
                       {shortDate ? (
-                        <div className="inline-flex items-center gap-2 rounded-xl border border-dashed border-zinc-200 bg-white px-3 py-2 text-sm shadow-sm">
-                          <span className="flex h-10 w-10 flex-col items-center justify-center rounded-lg border border-dotted border-zinc-200 bg-zinc-50 text-center">
-                            <span className="text-[9px] font-semibold uppercase tracking-[0.12em] text-zinc-500">
-                              {shortDate.month}
-                            </span>
-                            <span className="text-sm font-semibold leading-none text-zinc-900">
-                              {shortDate.day}
-                            </span>
-                          </span>
+                        <div className="inline-flex items-center rounded-sm border border-dashed border-zinc-200 bg-white px-2 py-1 text-xs shadow-sm sm:rounded-sm sm:px-3 sm:py-2 sm:text-sm">
                           <span className="font-medium text-zinc-800">
-                            {formatWebinarDate(activeWebinar.scheduledAt)}
+                            Date: {formatWebinarDate(activeWebinar.scheduledAt)}
                           </span>
                         </div>
                       ) : null}
-                      <span className="inline-flex rounded-xl border border-dashed border-zinc-200 bg-white px-3 py-2.5 text-sm font-medium text-zinc-700 shadow-sm">
-                        {formatWebinarTime(activeWebinar.scheduledAt)}
+                      <span className="inline-flex rounded-sm border border-dashed border-zinc-200 bg-white px-2 py-1 text-xs font-medium text-zinc-700 shadow-sm sm:rounded-sm sm:px-3 sm:py-2 sm:text-sm">
+                        Time: {formatWebinarTime(activeWebinar.scheduledAt)}
                       </span>
                     </div>
                   ) : (
@@ -341,7 +369,7 @@ export function WebinarRegistrationModal({
               </div>
             </div>
 
-            <div className="webinar-modal-scroll min-h-0 flex-1 overflow-y-auto overscroll-contain bg-zinc-50/40 px-4 py-4 sm:px-6 sm:py-5">
+            <div className="webinar-modal-scroll relative z-10 min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4 sm:px-6 sm:py-5">
               {submitted ? (
                 <div className="rounded-2xl border border-dashed border-emerald-200 bg-emerald-50/80 px-5 py-10 text-center">
                   <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-dashed border-emerald-300 bg-white text-lg text-emerald-600">
@@ -368,50 +396,55 @@ export function WebinarRegistrationModal({
                   onSubmit={handleSubmit}
                   className="space-y-4 pb-2"
                 >
-                  <FormSection title="Webinar Selection">
-                    <div>
-                      <label htmlFor="selectedWebinar" className={labelClassName}>
-                        Select webinar <RequiredMark />
-                      </label>
-                      {upcomingWebinars.length > 0 ? (
-                        <>
-                          <select
-                            id="selectedWebinar"
-                            required
-                            value={form.selectedWebinarId}
-                            onChange={(e) => {
-                              updateField("selectedWebinarId", e.target.value);
-                              if (e.target.value) setWebinarError(false);
-                            }}
-                            className={cn(
-                              inputClassName,
-                              "appearance-none",
-                              webinarError && "border-red-300 bg-red-50/40",
-                            )}
-                          >
-                            <option value="" disabled>
-                              Select an upcoming webinar
-                            </option>
-                            {upcomingWebinars.map((session) => (
-                              <option key={session.id} value={session.id}>
-                                {formatWebinarOptionLabel(session)}
+                  {!webinar ? (
+                    <FormSection title="Webinar Selection">
+                      <div>
+                        <label
+                          htmlFor="selectedWebinar"
+                          className={labelClassName}
+                        >
+                          Select webinar <RequiredMark />
+                        </label>
+                        {upcomingWebinars.length > 0 ? (
+                          <>
+                            <select
+                              id="selectedWebinar"
+                              required
+                              value={form.selectedWebinarId}
+                              onChange={(e) => {
+                                updateField("selectedWebinarId", e.target.value);
+                                if (e.target.value) setWebinarError(false);
+                              }}
+                              className={cn(
+                                inputClassName,
+                                "appearance-none",
+                                webinarError && "border-red-300 bg-red-50/40",
+                              )}
+                            >
+                              <option value="" disabled>
+                                Select an upcoming webinar
                               </option>
-                            ))}
-                          </select>
-                          {webinarError ? (
-                            <p className="mt-1.5 text-xs font-medium text-red-600">
-                              Please select a webinar to register.
-                            </p>
-                          ) : null}
-                        </>
-                      ) : (
-                        <p className="rounded-xl border border-dashed border-zinc-200 bg-zinc-50 px-3.5 py-2.5 text-sm text-zinc-600">
-                          No upcoming webinars are open for registration right
-                          now. Please check back soon.
-                        </p>
-                      )}
-                    </div>
-                  </FormSection>
+                              {upcomingWebinars.map((session) => (
+                                <option key={session.id} value={session.id}>
+                                  {formatWebinarOptionLabel(session)}
+                                </option>
+                              ))}
+                            </select>
+                            {webinarError ? (
+                              <p className="mt-1.5 text-xs font-medium text-red-600">
+                                Please select a webinar to register.
+                              </p>
+                            ) : null}
+                          </>
+                        ) : (
+                          <p className="rounded-xl border border-dashed border-zinc-200 bg-zinc-50 px-3.5 py-2.5 text-sm text-zinc-600">
+                            No upcoming webinars are open for registration right
+                            now. Please check back soon.
+                          </p>
+                        )}
+                      </div>
+                    </FormSection>
+                  ) : null}
 
                   <FormSection title="Personal Details">
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -432,7 +465,7 @@ export function WebinarRegistrationModal({
                       </div>
                       <div>
                         <label htmlFor="middleName" className={labelClassName}>
-                          Mid name
+                          Middle name
                         </label>
                         <input
                           id="middleName"
@@ -470,7 +503,7 @@ export function WebinarRegistrationModal({
                           <label
                             key={value}
                             className={cn(
-                              "inline-flex cursor-pointer items-center justify-center rounded-xl border border-dashed px-3 py-2.5 text-sm font-medium transition",
+                              "inline-flex cursor-pointer items-center justify-center rounded-sm border border-dashed px-3 py-2.5 text-sm font-medium transition",
                               form.pronoun === value
                                 ? "border-zinc-900 bg-zinc-900 text-white shadow-sm"
                                 : "border-zinc-200 bg-zinc-50/60 text-zinc-700 hover:border-zinc-300 hover:bg-white",
@@ -485,7 +518,14 @@ export function WebinarRegistrationModal({
                               onChange={() => updateField("pronoun", value)}
                               className="sr-only"
                             />
-                            {value === "he" ? "He" : "She"}
+                            <span className="inline-flex items-center gap-2">
+                              {value === "he" ? "He" : "She"}
+                              {value === "he" ? (
+                                <GenderMaleIcon />
+                              ) : (
+                                <GenderFemaleIcon />
+                              )}
+                            </span>
                           </label>
                         ))}
                       </div>
@@ -666,7 +706,7 @@ export function WebinarRegistrationModal({
             </div>
 
             {!submitted ? (
-              <div className="shrink-0 border-t border-dashed border-zinc-200 bg-white px-4 py-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:px-6">
+              <div className="relative z-10 shrink-0 border-t border-dashed border-zinc-200 px-4 py-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:px-6">
                 <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
                   <button
                     type="button"

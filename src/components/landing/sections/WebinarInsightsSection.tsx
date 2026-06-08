@@ -249,7 +249,7 @@ export function WebinarInsightsSection() {
           <div className="mt-6">
             <ShinyButton
               onClick={() => openRegistration()}
-              className="shiny-cta rounded-2xl! shadow-lg! shadow-zinc-800/20!"
+              className="shiny-cta rounded-2xl! shadow-lg! shadow-zinc-800/20! text-sm!"
             >
               REGISTER FOR THE NEXT WEBINAR
             </ShinyButton>

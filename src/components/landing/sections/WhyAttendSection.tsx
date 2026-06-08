@@ -17,13 +17,158 @@ const differentiators = [
 ];
 
 const benefits = [
-  { icon: "🧭", text: "Where the cybersecurity industry is heading" },
-  { icon: "🏢", text: "What multinational organizations are actually looking for" },
-  { icon: "📈", text: "Which cybersecurity specializations are growing fastest" },
-  { icon: "🗓️", text: "What skills will matter over the next 5–10 years" },
-  { icon: "🤖", text: "How AI is transforming cybersecurity careers" },
-  { icon: "🚀", text: "How to position yourself for future opportunities" },
+  { icon: <CompassIcon />, text: "Where the cybersecurity industry is heading" },
+  {
+    icon: <BuildingSkyscraperIcon />,
+    text: "What multinational organizations are actually looking for",
+  },
+  {
+    icon: <GitBranchIcon />,
+    text: "Which cybersecurity specializations are growing fastest",
+  },
+  {
+    icon: <TimelineEventPlusIcon />,
+    text: "What skills will matter over the next 5–10 years",
+  },
+  {
+    icon: <RobotFaceIcon />,
+    text: "How AI is transforming cybersecurity careers",
+  },
+  {
+    icon: <RocketIcon />,
+    text: "How to position yourself for future opportunities",
+  },
 ];
+
+function CompassIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M8 16l2 -6l6 -2l-2 6l-6 2" />
+      <path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+      <path d="M12 3l0 2" />
+      <path d="M12 19l0 2" />
+      <path d="M3 12l2 0" />
+      <path d="M19 12l2 0" />
+    </svg>
+  );
+}
+
+function BuildingSkyscraperIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M3 21l18 0" />
+      <path d="M5 21v-14l8 -4v18" />
+      <path d="M19 21v-10l-6 -4" />
+      <path d="M9 9l0 .01" />
+      <path d="M9 12l0 .01" />
+      <path d="M9 15l0 .01" />
+      <path d="M9 18l0 .01" />
+    </svg>
+  );
+}
+
+function GitBranchIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M5 18a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+      <path d="M5 6a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+      <path d="M15 6a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+      <path d="M7 8l0 8" />
+      <path d="M9 18h6a2 2 0 0 0 2 -2v-5" />
+      <path d="M14 14l3 -3l3 3" />
+    </svg>
+  );
+}
+
+function TimelineEventPlusIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 20a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+      <path d="M10 20h-6" />
+      <path d="M14 20h6" />
+      <path d="M12 15l-2 -2h-3a1 1 0 0 1 -1 -1v-8a1 1 0 0 1 1 -1h10a1 1 0 0 1 1 1v8a1 1 0 0 1 -1 1h-3l-2 2" />
+      <path d="M10 8h4" />
+      <path d="M12 6v4" />
+    </svg>
+  );
+}
+
+function RobotFaceIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M6 5h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2" />
+      <path d="M9 16c1 .667 2 1 3 1s2 -.333 3 -1" />
+      <path d="M9 7l-1 -4" />
+      <path d="M15 7l1 -4" />
+      <path d="M9 12v-1" />
+      <path d="M15 12v-1" />
+    </svg>
+  );
+}
+
+function RocketIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3" />
+      <path d="M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3" />
+      <path d="M15 9m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+    </svg>
+  );
+}
 
 const revealVariants = {
   visible: (i: number) => ({
@@ -131,7 +276,7 @@ export function WhyAttendSection() {
             animationNum={3}
             timelineRef={timelineRef}
             customVariants={revealVariants}
-            className="group relative aspect-4/3 w-full overflow-hidden rounded-3xl border border-zinc-200 bg-zinc-100 shadow-sm"
+            className="group relative aspect-4/3 w-full overflow-hidden  border border-zinc-200 bg-zinc-100 shadow-sm"
           >
             <Image
               src={WHY_IMAGE}

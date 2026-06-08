@@ -46,27 +46,18 @@ const revealVariants = {
 };
 
 function CardGridBackground({ variant = "light" }: { variant?: "light" | "dark" }) {
-  const lineColor = variant === "dark" ? "#52525b" : "#d4d4d8";
+  const lineColor = variant === "dark" ? "#52525b" : "#e5e5e5";
 
   return (
-    <div aria-hidden className="absolute inset-0 z-0">
-      <div
-        style={{
-          WebkitMaskImage:
-            "linear-gradient(to top, #000 0%, transparent 80%)",
-          backgroundImage: `linear-gradient(90deg, ${lineColor} 1px, transparent 1px)`,
-          backgroundSize: "8px 100%",
-          height: "100%",
-          left: "0",
-          maskImage: "linear-gradient(to top, #000 0%, transparent 80%)",
-          opacity: 0.5,
-          pointerEvents: "none",
-          position: "absolute",
-          top: "0",
-          width: "100%",
-        }}
-      />
-    </div>
+    <div
+      aria-hidden
+      className="pointer-events-none absolute inset-0 z-0"
+      style={{
+        backgroundImage: `repeating-linear-gradient(45deg, ${lineColor} 0, ${lineColor} 1px, transparent 0, transparent 50%), repeating-linear-gradient(-45deg, ${lineColor} 0, ${lineColor} 1px, transparent 0, transparent 50%)`,
+        backgroundSize: "6px 6px",
+        opacity: variant === "dark" ? 0.35 : 0.4,
+      }}
+    />
   );
 }
 
@@ -101,7 +92,7 @@ function TopicCard({
         "group relative flex h-full flex-col overflow-hidden border border-dashed p-7 transition-shadow duration-300 md:p-8",
         featured
           ? "border-zinc-700 bg-zinc-900 text-white shadow-xl shadow-zinc-900/15"
-          : "border-zinc-200 bg-white shadow-sm hover:shadow-md",
+          : "border-neutral-200 bg-neutral-50 shadow-sm hover:shadow-md",
       )}
     >
       <CardGridBackground variant={featured ? "dark" : "light"} />

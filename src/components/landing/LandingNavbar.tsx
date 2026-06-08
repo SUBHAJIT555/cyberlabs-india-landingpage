@@ -9,13 +9,39 @@ import Shuffle from "@/components/ui/Shuffle";
 import { useWebinarRegistration } from "@/context/webinar-registration";
 import { AnimatePresence, motion } from "framer-motion";
 
-const navItems = [
+const exploreLinks = [
   { label: "Why", href: "#why" },
   { label: "Expertise", href: "#expertise" },
   { label: "Career", href: "#career" },
   { label: "Topics", href: "#topics" },
   { label: "Audience", href: "#audience" },
   { label: "Webinars", href: "#webinars" },
+];
+
+const followLinks = [
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/cyberlabs-india/",
+    external: true,
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/cyberlabsindia",
+    external: true,
+  },
+];
+
+const contactLinks = [
+  {
+    label: "education@cyberlabs-india.com",
+    href: "mailto:education@cyberlabs-india.com",
+    external: true,
+  },
+  {
+    label: "cyberlabs-india.com",
+    href: "https://cyberlabs-india.com",
+    external: true,
+  },
 ];
 
 const mobilePanelVariants = {
@@ -42,6 +68,107 @@ const mobilePanelVariants = {
     },
   },
 };
+
+function MobileMenuPatternBackground() {
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none absolute inset-0 z-0"
+      style={{
+        backgroundImage:
+          "repeating-linear-gradient(45deg, #e5e5e5 0, #e5e5e5 1px, transparent 0, transparent 50%), repeating-linear-gradient(-45deg, #e5e5e5 0, #e5e5e5 1px, transparent 0, transparent 50%)",
+        backgroundSize: "5px 5px",
+        opacity: 0.4,
+      }}
+    />
+  );
+}
+
+function MobileNavSection({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-zinc-800">
+        {title}
+      </p>
+      <div className="mt-2 border-t border-dashed border-zinc-200 pt-3">
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function MobileNavLink({
+  href,
+  children,
+  external,
+  onClick,
+}: {
+  href: string;
+  children: React.ReactNode;
+  external?: boolean;
+  onClick?: () => void;
+}) {
+  const className =
+    "group inline-flex w-full items-center gap-1 rounded-md px-2 py-2 text-sm font-medium text-zinc-700 transition hover:bg-white/70 hover:text-zinc-900";
+
+  const content = (
+    <>
+      <span>{children}</span>
+      <MobileNavArrowIcon />
+    </>
+  );
+
+  if (external || href.startsWith("http") || href.startsWith("mailto:")) {
+    return (
+      <a
+        href={href}
+        target={external || href.startsWith("http") ? "_blank" : undefined}
+        rel={
+          external || href.startsWith("http") ? "noreferrer" : undefined
+        }
+        onClick={onClick}
+        className={className}
+      >
+        {content}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={href} onClick={onClick} className={className}>
+      {content}
+    </Link>
+  );
+}
+
+function MobileNavArrowIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="translate-x-[-3px] opacity-0 transition duration-200 group-hover:translate-x-0 group-hover:opacity-100"
+      aria-hidden="true"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M5 12h.5m3 0h1.5m3 0h6" />
+      <path d="M13 18l6 -6" />
+      <path d="M13 6l6 6" />
+    </svg>
+  );
+}
 
 const mobileItemVariants = {
   closed: {
@@ -105,7 +232,7 @@ export function LandingNavbar() {
         </Link>
 
         <div className="hidden items-center gap-5 lg:gap-6 md:flex">
-          {navItems.map((item) => (
+          {exploreLinks.map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -177,52 +304,74 @@ export function LandingNavbar() {
         {open && (
           <motion.div
             key="mobile-menu"
-            className="relative overflow-hidden border-t border-b shadow-lg border-zinc-200 bg-white md:hidden"
+            className="relative max-h-[calc(100dvh-4rem)] overflow-hidden border-b border-t border-neutral-200 bg-neutral-50 shadow-lg md:hidden"
             variants={mobilePanelVariants}
             initial="closed"
             animate="open"
             exit="closed"
           >
-            <div className="absolute inset-0 z-0">
-              <div
-                className="pointer-events-none absolute inset-0"
-                style={{
-                  WebkitMaskImage:
-                    "linear-gradient(to top, #000 0%, transparent 80%)",
-                  backgroundImage:
-                    "linear-gradient(90deg, #d4d4d8 1px, transparent 1px)",
-                  backgroundSize: "8px 100%",
-                  height: "100%",
-                  left: "0",
-                  maskImage:
-                    "linear-gradient(to top, #000 0%, transparent 80%)",
-                  opacity: 0.5,
-                  pointerEvents: "none",
-                  position: "absolute",
-                  top: "0",
-                  width: "100%",
-                }}
-              />
-            </div>
+            <MobileMenuPatternBackground />
             <motion.div
-              className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-1 px-3 py-3"
+              className="webinar-modal-scroll relative z-10 mx-auto flex max-h-[calc(100dvh-4rem)] w-full max-w-6xl flex-col gap-5 overflow-y-auto overscroll-contain px-4 py-4 pb-[max(1rem,env(safe-area-inset-bottom))]"
               variants={mobilePanelVariants}
             >
-              {navItems.map((item) => (
-                <motion.div key={item.href} variants={mobileItemVariants}>
-                  <Link
-                    href={item.href}
-                    onClick={() => setOpen(false)}
-                    className="rounded-md px-2 py-1.5 text-sm font-medium text-zinc-800 hover:bg-zinc-100"
-                  >
-                    {item.label}
-                  </Link>
-                </motion.div>
-              ))}
+              <motion.div variants={mobileItemVariants}>
+                <MobileNavSection title="Explore">
+                  <ul className="space-y-1">
+                    {exploreLinks.map((item) => (
+                      <li key={item.href}>
+                        <MobileNavLink
+                          href={item.href}
+                          onClick={() => setOpen(false)}
+                        >
+                          {item.label}
+                        </MobileNavLink>
+                      </li>
+                    ))}
+                  </ul>
+                </MobileNavSection>
+              </motion.div>
+
+              <motion.div variants={mobileItemVariants}>
+                <MobileNavSection title="Follow us on">
+                  <ul className="space-y-1">
+                    {followLinks.map((item) => (
+                      <li key={item.href}>
+                        <MobileNavLink
+                          href={item.href}
+                          external={item.external}
+                          onClick={() => setOpen(false)}
+                        >
+                          {item.label}
+                        </MobileNavLink>
+                      </li>
+                    ))}
+                  </ul>
+                </MobileNavSection>
+              </motion.div>
+
+              <motion.div variants={mobileItemVariants}>
+                <MobileNavSection title="Get in touch">
+                  <ul className="space-y-1">
+                    {contactLinks.map((item) => (
+                      <li key={item.href}>
+                        <MobileNavLink
+                          href={item.href}
+                          external={item.external}
+                          onClick={() => setOpen(false)}
+                        >
+                          {item.label}
+                        </MobileNavLink>
+                      </li>
+                    ))}
+                  </ul>
+                </MobileNavSection>
+              </motion.div>
+
               <motion.div variants={mobileItemVariants}>
                 <ShinyButton
                   onClick={handleRegister}
-                  className="mt-1 w-full justify-center px-6! py-4! text-sm! rounded-2xl!"
+                  className="w-full justify-center rounded-2xl! px-6! py-4! text-sm!"
                 >
                   Register Now
                 </ShinyButton>

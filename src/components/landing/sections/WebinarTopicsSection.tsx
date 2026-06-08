@@ -7,20 +7,20 @@ import ShinyText from "@/components/ui/ShinyText";
 import GradientText from "@/components/ui/GradientText";
 
 const webinarTopics = [
-  "🤖 AI Security & AI Red Teaming",
-  "🧠 Agentic AI Security & Autonomous Systems",
-  "🧬 Deepfake Detection & Synthetic Media Threats",
-  "🌐 Platform Security & Trust & Safety",
-  "📱 Social Media Threat Intelligence",
-  "🕵️ Cyber Intelligence & Digital Investigations",
-  "🌑 Dark Web Intelligence & Cybercrime Ecosystems",
-  "🔍 Detection Engineering & Threat Hunting",
-  "☁️ Cloud & Identity Security",
-  "🔐 Zero Trust Architecture",
-  "⚔️ Security Operations & Modern Defense",
-  "💰 Online Fraud, Scam Operations & Digital Risk",
-  "🌍 Global Cybersecurity Career Opportunities",
-  "📈 Future Cybersecurity Skills & Hiring Trends",
+  " AI Security & AI Red Teaming",
+  " Agentic AI Security & Autonomous Systems",
+  " Deepfake Detection & Synthetic Media Threats",
+  " Platform Security & Trust & Safety",
+  " Social Media Threat Intelligence",
+  " Cyber Intelligence & Digital Investigations",
+  " Dark Web Intelligence & Cybercrime Ecosystems",
+  " Detection Engineering & Threat Hunting",
+  " Cloud & Identity Security",
+  " Zero Trust Architecture",
+  " Security Operations & Modern Defense",
+  " Online Fraud, Scam Operations & Digital Risk",
+  "Global Cybersecurity Career Opportunities",
+  " Future Cybersecurity Skills & Hiring Trends",
 ];
 
 const revealVariants = {
@@ -148,7 +148,7 @@ export function WebinarTopicsSection() {
                       <span className="mt-0.5 w-8 shrink-0 text-sm font-semibold tabular-nums text-zinc-400 transition-colors group-hover:text-zinc-600">
                         {String(globalIndex + 1).padStart(2, "0")}
                       </span>
-                      <span className="text-sm leading-relaxed text-zinc-700 transition-colors group-hover:text-zinc-900 md:text-base">
+                      <span className="text-sm leading-relaxed text-zinc-700 transition-colors group-hover:text-zinc-900 md:text-base font-medium">
                         {topic}
                       </span>
                     </TimelineContent>
