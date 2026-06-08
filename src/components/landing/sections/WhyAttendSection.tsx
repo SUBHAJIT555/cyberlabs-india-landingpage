@@ -201,7 +201,7 @@ export function WhyAttendSection() {
           </div>
           <p className="relative z-10">
             <GradientText
-              className="text-xs font-semibold! uppercase tracking-[0.18em]"
+              className="text-xs font-bold! uppercase tracking-[0.18em]"
               colors={["#52525b", "#2563eb", "#3f3f46", "#1d4ed8", "#52525b"]}
               animationSpeed={4}
               direction="horizontal"

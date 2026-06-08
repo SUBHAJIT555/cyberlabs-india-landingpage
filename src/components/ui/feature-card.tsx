@@ -45,7 +45,7 @@ export function FeatureCard({ feature, className, ...props }: FeatureCardProps) 
           <span aria-hidden>{feature.icon}</span>
         </div>
 
-        <h3 className="relative z-20 mt-8 text-sm font-semibold text-zinc-900 md:text-base lg:text-lg">
+        <h3 className="relative z-20 mt-8 text-sm font-semibold text-zinc-900 md:text-base lg:text-xl!">
           {feature.title}
         </h3>
       </div>

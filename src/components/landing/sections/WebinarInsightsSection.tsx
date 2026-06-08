@@ -175,15 +175,16 @@ export function WebinarInsightsSection() {
             <p className="text-sm leading-relaxed text-zinc-800 md:text-base">
               As demand continues to grow across{" "}
               {markets.map((market, index) => (
-                <span key={market.code} className="whitespace-nowrap">
+                <span key={market.code}>
                   <ReactCountryFlag
                     countryCode={market.code}
                     svg
+                    className="inline-block"
                     style={{
                       width: "1.1em",
                       height: "1.1em",
                       borderRadius: "2px",
-                      verticalAlign: "-0.18em",
+                      verticalAlign: "-0.15em",
                     }}
                     title={market.label}
                   />{" "}
