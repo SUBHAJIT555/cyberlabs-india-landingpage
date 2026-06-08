@@ -312,6 +312,7 @@ export function LandingNavbar() {
           >
             <MobileMenuPatternBackground />
             <motion.div
+              data-lenis-prevent
               className="webinar-modal-scroll relative z-10 mx-auto flex max-h-[calc(100dvh-4rem)] w-full max-w-6xl flex-col gap-5 overflow-y-auto overscroll-contain px-4 py-4 pb-[max(1rem,env(safe-area-inset-bottom))]"
               variants={mobilePanelVariants}
             >

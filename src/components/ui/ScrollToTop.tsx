@@ -1,30 +1,28 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useLenis } from "lenis/react";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 
 const PROGRESS_RADIUS = 46;
 const PROGRESS_CIRCUMFERENCE = 2 * Math.PI * PROGRESS_RADIUS;
 
 export function ScrollToTop() {
+  const lenis = useLenis();
   const [isVisible, setIsVisible] = useState(false);
   const [progress, setProgress] = useState(0);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const maxScroll =
-        document.documentElement.scrollHeight - window.innerHeight;
+  useLenis(
+    (instance) => {
+      const scrollY = instance.scroll;
+      const maxScroll = instance.limit;
 
       setIsVisible(scrollY > 0);
       setProgress(maxScroll > 0 ? (scrollY / maxScroll) * 100 : 0);
-    };
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    },
+    [],
+    0,
+  );
 
   const strokeDashoffset =
     PROGRESS_CIRCUMFERENCE - (progress / 100) * PROGRESS_CIRCUMFERENCE;
@@ -40,9 +38,9 @@ export function ScrollToTop() {
     >
       <button
         type="button"
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        onClick={() => lenis?.scrollTo(0, { duration: 1.2 })}
         aria-label="Scroll to top"
-        className="group relative flex h-11 w-11 items-center justify-center rounded-full md:h-14 md:w-14"
+        className="group relative flex h-11 w-11 items-center justify-center rounded-full md:h-14 md:w-14 cursor-pointer"
       >
         <svg
           aria-hidden

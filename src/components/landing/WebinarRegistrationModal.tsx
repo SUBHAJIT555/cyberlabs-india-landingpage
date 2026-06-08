@@ -369,7 +369,10 @@ export function WebinarRegistrationModal({
               </div>
             </div>
 
-            <div className="webinar-modal-scroll relative z-10 min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4 sm:px-6 sm:py-5">
+            <div
+              data-lenis-prevent
+              className="webinar-modal-scroll relative z-10 min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4 sm:px-6 sm:py-5"
+            >
               {submitted ? (
                 <div className="rounded-2xl border border-dashed border-emerald-200 bg-emerald-50/80 px-5 py-10 text-center">
                   <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-dashed border-emerald-300 bg-white text-lg text-emerald-600">

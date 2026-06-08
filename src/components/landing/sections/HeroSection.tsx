@@ -1,5 +1,6 @@
 "use client";
 
+import { useLenis } from "lenis/react";
 import { useRef } from "react";
 import { useWebinarRegistration } from "@/context/webinar-registration";
 import { TimelineContent } from "@/components/ui/timeline-animation";
@@ -244,6 +245,7 @@ function CloudSecurityIcon() {
 
 export function HeroSection() {
   const timelineRef = useRef<HTMLDivElement>(null);
+  const lenis = useLenis();
   const { openRegistration } = useWebinarRegistration();
 
   return (
@@ -318,11 +320,7 @@ export function HeroSection() {
               Register Now
             </ShinyButton>
             <ShinyButton
-              onClick={() =>
-                document
-                  .querySelector("#webinars")
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
+              onClick={() => lenis?.scrollTo("#webinars", { offset: -64 })}
               className="shiny-cta--compact shiny-cta--light w-full rounded-xl! px-6! py-3.5! text-sm! shadow-lg! shadow-zinc-800/20! sm:w-auto sm:rounded-lg! sm:px-4! sm:py-2.5!"
             >
               View Webinars
