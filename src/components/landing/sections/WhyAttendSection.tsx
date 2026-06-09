@@ -7,8 +7,7 @@ import { FeatureCard } from "@/components/ui/feature-card";
 import ShinyText from "@/components/ui/ShinyText";
 import GradientText from "@/components/ui/GradientText";
 
-const WHY_IMAGE =
-  "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1400&auto=format&fit=crop";
+const WHY_IMAGE ="/images/Img-03.webp";
 
 const differentiators = [
   "Most cybersecurity webinars focus on tools.",
@@ -276,7 +275,7 @@ export function WhyAttendSection() {
             animationNum={3}
             timelineRef={timelineRef}
             customVariants={revealVariants}
-            className="group relative aspect-4/3 w-full overflow-hidden  border border-zinc-200 bg-zinc-100 shadow-sm"
+            className="group relative aspect-4/3 w-full overflow-hidden"
           >
             <Image
               src={WHY_IMAGE}
@@ -285,7 +284,7 @@ export function WhyAttendSection() {
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover transition duration-700 group-hover:scale-[1.03]"
             />
-            <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-zinc-900/30 via-transparent to-transparent" />
+            {/* <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-zinc-900/30 via-transparent to-transparent" /> */}
           </TimelineContent>
         </div>
 

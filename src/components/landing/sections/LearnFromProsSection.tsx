@@ -7,8 +7,7 @@ import { TimelineContent } from "@/components/ui/timeline-animation";
 import ShinyText from "@/components/ui/ShinyText";
 import GradientText from "@/components/ui/GradientText";
 
-const PROS_IMAGE =
-  "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1400&auto=format&fit=crop";
+const PROS_IMAGE ="/images/Img-04.webp";
 
 const expertiseAreas = [
   { label: "Cyber Defense", icon: <ShieldLockIcon /> },
@@ -371,7 +370,7 @@ export function LearnFromProsSection() {
               customVariants={revealVariants}
               className="py-7 md:py-9 md:pl-10"
             >
-              <div className="group relative h-full min-h-[260px] w-full overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-100">
+              <div className="group relative h-full min-h-[260px] w-full overflow-hidden">
                 <Image
                   src={PROS_IMAGE}
                   alt="Active cybersecurity professionals collaborating"
@@ -379,7 +378,7 @@ export function LearnFromProsSection() {
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover transition duration-700 group-hover:scale-[1.04]"
                 />
-                <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-zinc-900/30 via-transparent to-transparent" />
+                {/* <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-zinc-900/30 via-transparent to-transparent" /> */}
               </div>
             </TimelineContent>
           </div>

@@ -18,10 +18,8 @@ const markets = [
 ];
 
 const INSIGHT_IMAGES = {
-  industry:
-    "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1400&auto=format&fit=crop",
-  questions:
-    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1400&auto=format&fit=crop",
+  industry: "/images/Img-01.webp",
+  questions: "/images/Img-02.webp",
 } as const;
 
 const specializations = [

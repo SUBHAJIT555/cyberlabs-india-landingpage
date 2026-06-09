@@ -1,7 +1,7 @@
 "use client";
 
 import { useLenis } from "lenis/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 const PROGRESS_RADIUS = 46;
@@ -12,17 +12,25 @@ export function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
   const [progress, setProgress] = useState(0);
 
-  useLenis(
-    (instance) => {
+  useEffect(() => {
+    if (!lenis) return;
+
+    const update = (instance: { scroll: number; limit: number }) => {
       const scrollY = instance.scroll;
       const maxScroll = instance.limit;
+      const nextVisible = scrollY > 0;
+      const nextProgress =
+        maxScroll > 0 ? (scrollY / maxScroll) * 100 : 0;
 
-      setIsVisible(scrollY > 0);
-      setProgress(maxScroll > 0 ? (scrollY / maxScroll) * 100 : 0);
-    },
-    [],
-    0,
-  );
+      setIsVisible((prev) => (prev === nextVisible ? prev : nextVisible));
+      setProgress((prev) =>
+        Math.abs(prev - nextProgress) < 0.25 ? prev : nextProgress,
+      );
+    };
+
+    update(lenis);
+    return lenis.on("scroll", update);
+  }, [lenis]);
 
   const strokeDashoffset =
     PROGRESS_CIRCUMFERENCE - (progress / 100) * PROGRESS_CIRCUMFERENCE;

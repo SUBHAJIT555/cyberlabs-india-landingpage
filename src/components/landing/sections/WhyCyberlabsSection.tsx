@@ -6,8 +6,7 @@ import { TimelineContent } from "@/components/ui/timeline-animation";
 import ShinyText from "@/components/ui/ShinyText";
 import GradientText from "@/components/ui/GradientText";
 
-const WHY_CYBERLABS_IMAGE =
-  "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1400&auto=format&fit=crop";
+const WHY_CYBERLABS_IMAGE ="/images/Img-05.webp";
 
 const whyChooseItems = [
   "Learn From Real Cyber Professionals",
@@ -164,7 +163,7 @@ export function WhyCyberlabsSection() {
             animationNum={4}
             timelineRef={timelineRef}
             customVariants={revealVariants}
-            className="group relative min-h-[280px] overflow-hidden border border-zinc-200 bg-zinc-100 lg:min-h-full"
+            className="group relative min-h-[280px] overflow-hidden lg:min-h-full"
           >
             <Image
               src={WHY_CYBERLABS_IMAGE}
@@ -173,7 +172,7 @@ export function WhyCyberlabsSection() {
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover transition duration-700 group-hover:scale-[1.03]"
             />
-            <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-zinc-900/40 via-zinc-900/5 to-transparent" />
+            {/* <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-zinc-900/40 via-zinc-900/5 to-transparent" /> */}
             <div className="pointer-events-none absolute inset-0 border border-white/10" />
           </TimelineContent>
         </div>
