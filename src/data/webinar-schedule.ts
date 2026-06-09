@@ -41,44 +41,46 @@ export const backgroundOptions = [
 export type BackgroundOption = (typeof backgroundOptions)[number];
 
 export const upcomingWebinars: WebinarSession[] = [
+  // Past sessions (registration closed)
   {
     id: "future-careers",
-    scheduledAt: "2026-05-28T19:00:00+05:30",
+    scheduledAt: "2026-06-02T19:00:00+05:30",
     topic: "The Future of Cybersecurity Careers",
   },
   {
     id: "ai-security",
-    scheduledAt: "2026-06-01T19:00:00+05:30",
+    scheduledAt: "2026-06-05T19:00:00+05:30",
     topic: "AI Security & The Future of Cyber Defense",
   },
+  // Upcoming sessions
   {
     id: "dark-web",
-    scheduledAt: "2026-06-04T19:00:00+05:30",
+    scheduledAt: "2026-06-10T19:00:00+05:30",
     topic: "Dark Web Intelligence & Cybercrime Trends",
   },
   {
     id: "detection-engineering",
-    scheduledAt: "2026-06-10T19:00:00+05:30",
+    scheduledAt: "2026-06-12T19:00:00+05:30",
     topic: "Detection Engineering & Threat Hunting",
   },
   {
     id: "platform-security",
-    scheduledAt: "2026-06-12T19:00:00+05:30",
+    scheduledAt: "2026-06-17T19:00:00+05:30",
     topic: "Platform Security & Trust & Safety",
   },
   {
     id: "identity-zero-trust",
-    scheduledAt: "2026-06-17T19:00:00+05:30",
+    scheduledAt: "2026-06-19T19:00:00+05:30",
     topic: "Identity Security & Zero Trust",
   },
   {
     id: "future-skills",
-    scheduledAt: "2026-06-19T19:00:00+05:30",
+    scheduledAt: "2026-06-24T19:00:00+05:30",
     topic: "Future Skills Cybersecurity Professionals Need",
   },
   {
     id: "ask-professionals",
-    scheduledAt: "2026-06-24T19:00:00+05:30",
+    scheduledAt: "2026-06-26T19:00:00+05:30",
     topic: "Ask the Cyber Professionals",
   },
 ];
