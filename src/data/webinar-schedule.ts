@@ -42,6 +42,8 @@ export type BackgroundOption = (typeof backgroundOptions)[number];
 
 export const upcomingWebinars: WebinarSession[] = [
   // Past sessions (registration closed)
+
+  
   {
     id: "future-careers",
     scheduledAt: "2026-06-02T19:00:00+05:30",
@@ -52,6 +54,8 @@ export const upcomingWebinars: WebinarSession[] = [
     scheduledAt: "2026-06-05T19:00:00+05:30",
     topic: "AI Security & The Future of Cyber Defense",
   },
+
+
   // Upcoming sessions
   {
     id: "dark-web",

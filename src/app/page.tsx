@@ -18,12 +18,12 @@ export default function Home() {
       <main className="flex-1">
         <HeroSection />
         <WebinarInsightsSection />
+        <WebinarScheduleSection />
         <WhyAttendSection />
         <LearnFromProsSection />
         <CareerBenefitsSection />
         <WebinarTopicsSection />
         <WhoShouldAttendSection />
-        <WebinarScheduleSection />
         <WhyCyberlabsSection />
         <WhyChooseCTASection />
       </main>

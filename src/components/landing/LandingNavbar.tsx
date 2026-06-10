@@ -10,12 +10,13 @@ import { useWebinarRegistration } from "@/context/webinar-registration";
 import { AnimatePresence, motion } from "framer-motion";
 
 const exploreLinks = [
+  { label: "Webinars", href: "#webinars" },
   { label: "Why", href: "#why" },
   { label: "Expertise", href: "#expertise" },
   { label: "Career", href: "#career" },
   { label: "Topics", href: "#topics" },
   { label: "Audience", href: "#audience" },
-  { label: "Webinars", href: "#webinars" },
+  
 ];
 
 const followLinks = [
@@ -193,6 +194,11 @@ export function LandingNavbar() {
     setOpen(false);
   };
 
+  const handleVisitWebsite = () => {
+    window.open("https://cyberlabs-india.com/", "_blank", "noopener,noreferrer");
+    setOpen(false);
+  };
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
     onScroll();
@@ -214,7 +220,7 @@ export function LandingNavbar() {
         scrolled ? "border-zinc-200 bg-white/50" : "border-transparent bg-white/45",
       )}
     >
-      <nav className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 lg:px-8">
+      <nav className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 lg:px-8">
         <Link
           href="#home"
           className="inline-flex items-center"
@@ -259,8 +265,17 @@ export function LandingNavbar() {
           ))}
         </div>
 
-        <div className="hidden md:block">
-          <ShinyButton onClick={handleRegister} className="shiny-cta--compact rounded-lg! shadow-lg! shadow-zinc-800/20!">
+        <div className="hidden items-center gap-2.5 md:flex">
+          <ShinyButton
+            onClick={handleVisitWebsite}
+            className="shiny-cta--compact shiny-cta--light rounded-lg! shadow-lg! shadow-zinc-800/20!"
+          >
+            Visit Main Website
+          </ShinyButton>
+          <ShinyButton
+            onClick={handleRegister}
+            className="shiny-cta--compact rounded-lg! shadow-lg! shadow-zinc-800/20!"
+          >
             Register Now
           </ShinyButton>
         </div>
@@ -369,7 +384,13 @@ export function LandingNavbar() {
                 </MobileNavSection>
               </motion.div>
 
-              <motion.div variants={mobileItemVariants}>
+              <motion.div variants={mobileItemVariants} className="flex flex-col gap-2.5">
+                <ShinyButton
+                  onClick={handleVisitWebsite}
+                  className="shiny-cta--light w-full justify-center rounded-2xl! px-6! py-4! text-sm!"
+                >
+                  Visit Main Website
+                </ShinyButton>
                 <ShinyButton
                   onClick={handleRegister}
                   className="w-full justify-center rounded-2xl! px-6! py-4! text-sm!"

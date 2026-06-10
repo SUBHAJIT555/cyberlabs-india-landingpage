@@ -88,12 +88,24 @@ export function WhyChooseCTASection() {
               understanding needed to make informed career decisions.
             </p>
 
-            <div className="mt-8 flex justify-center">
+            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
               <ShinyButton
                 onClick={() => openRegistration()}
-                className="shiny-cta rounded-2xl! shadow-lg! shadow-zinc-800/20! text-sm!"
+                className="shiny-cta w-full rounded-2xl! text-sm! shadow-lg! shadow-zinc-800/20! sm:w-auto"
               >
                 REGISTER FOR THE NEXT WEBINAR
+              </ShinyButton>
+              <ShinyButton
+                onClick={() =>
+                  window.open(
+                    "https://cyberlabs-india.com/",
+                    "_blank",
+                    "noopener,noreferrer",
+                  )
+                }
+                className="shiny-cta--light w-full rounded-2xl! text-sm! shadow-lg! shadow-zinc-800/20! sm:w-auto"
+              >
+                VISIT OUR MAIN WEBSITE
               </ShinyButton>
             </div>
 

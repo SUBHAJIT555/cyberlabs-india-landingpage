@@ -248,8 +248,17 @@ export function WebinarScheduleSection() {
           <h3 className="text-lg font-semibold text-zinc-900 md:text-xl">
             {webinarScheduleContent.tableHeading}
           </h3>
-          <p className="text-sm text-zinc-500">
-            {upcomingCount} upcoming session{upcomingCount === 1 ? "" : "s"}
+          <p className="text-sm">
+            <GradientText
+              className="m-0! text-sm font-medium!"
+              colors={["#52525b", "#2563eb", "#3f3f46", "#1d4ed8", "#52525b"]}
+              animationSpeed={4}
+              direction="horizontal"
+              showBorder={false}
+              pauseOnHover={false}
+            >
+              {upcomingCount} upcoming session{upcomingCount === 1 ? "" : "s"}
+            </GradientText>
           </p>
         </TimelineContent>
 
