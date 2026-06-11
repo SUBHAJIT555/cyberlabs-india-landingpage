@@ -9,12 +9,13 @@ import ShinyText from "@/components/ui/ShinyText";
 import { cn } from "@/lib/cn";
 
 const exploreLinks = [
+  { label: "Webinars", href: "#webinars" },
   { label: "Why", href: "#why" },
   { label: "Expertise", href: "#expertise" },
   { label: "Career", href: "#career" },
   { label: "Topics", href: "#topics" },
   { label: "Audience", href: "#audience" },
-  { label: "Webinars", href: "#webinars" },
+
 ];
 
 const inputClassName =
