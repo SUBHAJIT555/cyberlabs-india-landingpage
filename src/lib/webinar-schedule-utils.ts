@@ -71,3 +71,65 @@ export function getUpcomingWebinars(
 export function formatWebinarOptionLabel(webinar: WebinarSession): string {
   return `${formatWebinarDate(webinar.scheduledAt)} · ${formatWebinarTime(webinar.scheduledAt)} · ${webinar.topic}`;
 }
+
+const PREFERRED_CALL_BUFFER_MS = 12 * 60 * 60 * 1000;
+
+export type PreferredCallTimeBounds = {
+  /** Earliest selectable moment (now). */
+  min: Date;
+  /** Latest selectable moment (webinar start minus 12 hours). */
+  max: Date | null;
+  /** Last selectable calendar day (webinar day). */
+  maxDate: Date | null;
+};
+
+/** Bounds for the pre-webinar consultation call picker. */
+export function getPreferredCallTimeBounds(
+  webinar: WebinarSession | null,
+): PreferredCallTimeBounds {
+  const min = new Date();
+  if (!webinar) {
+    return { min, max: null, maxDate: null };
+  }
+
+  const webinarStart = new Date(webinar.scheduledAt);
+  const max = new Date(webinarStart.getTime() - PREFERRED_CALL_BUFFER_MS);
+
+  if (max.getTime() <= min.getTime()) {
+    return { min, max: min, maxDate: webinarStart };
+  }
+
+  return { min, max, maxDate: webinarStart };
+}
+
+export function isPreferredCallTimeValid(
+  value: Date,
+  bounds: PreferredCallTimeBounds,
+): boolean {
+  const selectedTime = value.getTime();
+  if (selectedTime < bounds.min.getTime()) return false;
+  if (bounds.max && selectedTime > bounds.max.getTime()) return false;
+  return true;
+}
+
+export function formatPreferredCallDeadline(scheduledAt: string): string {
+  const deadline = new Date(
+    new Date(scheduledAt).getTime() - PREFERRED_CALL_BUFFER_MS,
+  );
+
+  const date = new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    timeZone: IST_TIMEZONE,
+  }).format(deadline);
+
+  const time = new Intl.DateTimeFormat("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+    timeZone: IST_TIMEZONE,
+  }).format(deadline);
+
+  return `${date} at ${time} IST`;
+}

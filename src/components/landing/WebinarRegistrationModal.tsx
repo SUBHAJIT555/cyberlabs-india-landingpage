@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -10,12 +11,16 @@ import {
   type WebinarSession,
 } from "@/data/webinar-schedule";
 import {
+  formatPreferredCallDeadline,
   formatWebinarDate,
   formatWebinarOptionLabel,
   formatWebinarShortDate,
   formatWebinarTime,
+  getPreferredCallTimeBounds,
   getUpcomingWebinars,
+  isPreferredCallTimeValid,
 } from "@/lib/webinar-schedule-utils";
+import { submitForm } from "@/lib/submit-form";
 import "react-datepicker/dist/react-datepicker.css";
 
 type WebinarRegistrationModalProps = {
@@ -24,11 +29,11 @@ type WebinarRegistrationModalProps = {
   onClose: () => void;
 };
 
-type FormState = {
+type RegistrationFormValues = {
   firstName: string;
   middleName: string;
   lastName: string;
-  pronoun: "" | "he" | "she";
+  gender: "" | "he" | "she";
   email: string;
   mobile: string;
   background: string;
@@ -39,11 +44,11 @@ type FormState = {
   selectedWebinarId: string;
 };
 
-const initialFormState: FormState = {
+const defaultFormValues: RegistrationFormValues = {
   firstName: "",
   middleName: "",
   lastName: "",
-  pronoun: "",
+  gender: "",
   email: "",
   mobile: "",
   background: "",
@@ -130,6 +135,14 @@ function RequiredMark() {
   return <span className="text-blue-500">*</span>;
 }
 
+function FieldError({ message }: { message?: string }) {
+  if (!message) return null;
+
+  return (
+    <p className="mt-1.5 text-xs font-medium text-red-600">{message}</p>
+  );
+}
+
 function GenderMaleIcon() {
   return (
     <svg
@@ -179,19 +192,45 @@ export function WebinarRegistrationModal({
   onClose,
 }: WebinarRegistrationModalProps) {
   const isMobile = useIsMobile();
-  const [form, setForm] = useState<FormState>(initialFormState);
   const [submitted, setSubmitted] = useState(false);
-  const [dateError, setDateError] = useState(false);
-  const [webinarError, setWebinarError] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    control,
+    setValue,
+    formState: { errors },
+  } = useForm<RegistrationFormValues>({
+    defaultValues: defaultFormValues,
+  });
+
+  const selectedWebinarId = watch("selectedWebinarId");
+  const background = watch("background");
+  const showOtherBackground = background === "Other";
 
   const upcomingWebinars = useMemo(() => getUpcomingWebinars(), []);
 
   const activeWebinar = useMemo(
     () =>
-      upcomingWebinars.find((session) => session.id === form.selectedWebinarId) ??
+      upcomingWebinars.find((session) => session.id === selectedWebinarId) ??
       null,
-    [form.selectedWebinarId, upcomingWebinars],
+    [selectedWebinarId, upcomingWebinars],
   );
+
+  const preferredCallBounds = useMemo(
+    () => getPreferredCallTimeBounds(activeWebinar),
+    [activeWebinar],
+  );
+
+  const preferredCallWindowOpen = useMemo(() => {
+    if (!activeWebinar) return true;
+    const { min, max } = preferredCallBounds;
+    return Boolean(max && max.getTime() > min.getTime());
+  }, [activeWebinar, preferredCallBounds]);
 
   const shortDate = activeWebinar
     ? formatWebinarShortDate(activeWebinar.scheduledAt)
@@ -199,18 +238,39 @@ export function WebinarRegistrationModal({
 
   useEffect(() => {
     if (!isOpen) {
-      setForm(initialFormState);
+      reset(defaultFormValues);
       setSubmitted(false);
-      setDateError(false);
-      setWebinarError(false);
+      setSubmitError(null);
+      setIsSubmitting(false);
       return;
     }
 
-    setForm({
-      ...initialFormState,
+    reset({
+      ...defaultFormValues,
       selectedWebinarId: webinar?.id ?? "",
     });
-  }, [isOpen, webinar?.id]);
+  }, [isOpen, webinar?.id, reset]);
+
+  const preferredCallDateTime = watch("preferredCallDateTime");
+
+  useEffect(() => {
+    if (!isOpen || !preferredCallDateTime) return;
+
+    const { min, max } = preferredCallBounds;
+    const selectedTime = preferredCallDateTime.getTime();
+
+    if (
+      selectedTime < min.getTime() ||
+      (max && selectedTime > max.getTime())
+    ) {
+      setValue("preferredCallDateTime", null);
+    }
+  }, [
+    isOpen,
+    preferredCallBounds,
+    preferredCallDateTime,
+    setValue,
+  ]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -228,39 +288,39 @@ export function WebinarRegistrationModal({
     };
   }, [isOpen, onClose]);
 
-  const showOtherBackground = form.background === "Other";
+  const onSubmit = async (data: RegistrationFormValues) => {
+    if (!activeWebinar || isSubmitting) return;
 
-  const updateField = <K extends keyof FormState>(
-    key: K,
-    value: FormState[K],
-  ) => {
-    setForm((prev) => ({ ...prev, [key]: value }));
-  };
+    setIsSubmitting(true);
+    setSubmitError(null);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (!form.selectedWebinarId || !activeWebinar) {
-      setWebinarError(true);
-      return;
-    }
-
-    if (!form.preferredCallDateTime) {
-      setDateError(true);
-      return;
-    }
-
-    setWebinarError(false);
-    setDateError(false);
-
-    const payload = {
-      webinar: activeWebinar,
-      ...form,
+    const result = await submitForm({
+      formType: "webinar-registration",
+      firstName: data.firstName,
+      middleName: data.middleName,
+      lastName: data.lastName,
+      gender: data.gender,
+      email: data.email,
+      mobile: data.mobile,
       background:
-        form.background === "Other" ? form.backgroundOther : form.background,
-    };
+        data.background === "Other" ? data.backgroundOther : data.background,
+      yearsOfExperience: data.yearsOfExperience,
+      preferredCallDateTime: data.preferredCallDateTime?.toISOString() ?? "",
+      specificQuestion: data.specificQuestion,
+      webinarId: activeWebinar.id,
+      webinarTopic: activeWebinar.topic,
+      webinarScheduledAt: activeWebinar.scheduledAt,
+    });
 
-    console.log("Webinar registration submitted:", payload);
+    
+
+    setIsSubmitting(false);
+
+    if (!result.success) {
+      setSubmitError(result.error);
+      return;
+    }
+
     setSubmitted(true);
   };
 
@@ -396,8 +456,9 @@ export function WebinarRegistrationModal({
               ) : (
                 <form
                   id="webinar-registration-form"
-                  onSubmit={handleSubmit}
+                  onSubmit={handleSubmit(onSubmit)}
                   className="space-y-4 pb-2"
+                  noValidate
                 >
                   {!webinar ? (
                     <FormSection title="Webinar Selection">
@@ -412,17 +473,18 @@ export function WebinarRegistrationModal({
                           <>
                             <select
                               id="selectedWebinar"
-                              required
-                              value={form.selectedWebinarId}
-                              onChange={(e) => {
-                                updateField("selectedWebinarId", e.target.value);
-                                if (e.target.value) setWebinarError(false);
-                              }}
                               className={cn(
                                 inputClassName,
                                 "appearance-none",
-                                webinarError && "border-red-300 bg-red-50/40",
+                                errors.selectedWebinarId &&
+                                  "border-red-300 bg-red-50/40",
                               )}
+                              {...register("selectedWebinarId", {
+                                validate: (value) =>
+                                  webinar || value
+                                    ? true
+                                    : "Please select a webinar to register.",
+                              })}
                             >
                               <option value="" disabled>
                                 Select an upcoming webinar
@@ -433,11 +495,7 @@ export function WebinarRegistrationModal({
                                 </option>
                               ))}
                             </select>
-                            {webinarError ? (
-                              <p className="mt-1.5 text-xs font-medium text-red-600">
-                                Please select a webinar to register.
-                              </p>
-                            ) : null}
+                            <FieldError message={errors.selectedWebinarId?.message} />
                           </>
                         ) : (
                           <p className="rounded-xl border border-dashed border-zinc-200 bg-zinc-50 px-3.5 py-2.5 text-sm text-zinc-600">
@@ -457,14 +515,16 @@ export function WebinarRegistrationModal({
                         </label>
                         <input
                           id="firstName"
-                          required
-                          value={form.firstName}
-                          onChange={(e) =>
-                            updateField("firstName", e.target.value)
-                          }
-                          className={inputClassName}
                           autoComplete="given-name"
+                          className={cn(
+                            inputClassName,
+                            errors.firstName && "border-red-300 bg-red-50/40",
+                          )}
+                          {...register("firstName", {
+                            required: "First name is required.",
+                          })}
                         />
+                        <FieldError message={errors.firstName?.message} />
                       </div>
                       <div>
                         <label htmlFor="middleName" className={labelClassName}>
@@ -472,12 +532,9 @@ export function WebinarRegistrationModal({
                         </label>
                         <input
                           id="middleName"
-                          value={form.middleName}
-                          onChange={(e) =>
-                            updateField("middleName", e.target.value)
-                          }
-                          className={inputClassName}
                           autoComplete="additional-name"
+                          className={inputClassName}
+                          {...register("middleName")}
                         />
                       </div>
                       <div>
@@ -486,14 +543,16 @@ export function WebinarRegistrationModal({
                         </label>
                         <input
                           id="lastName"
-                          required
-                          value={form.lastName}
-                          onChange={(e) =>
-                            updateField("lastName", e.target.value)
-                          }
-                          className={inputClassName}
                           autoComplete="family-name"
+                          className={cn(
+                            inputClassName,
+                            errors.lastName && "border-red-300 bg-red-50/40",
+                          )}
+                          {...register("lastName", {
+                            required: "Last name is required.",
+                          })}
                         />
+                        <FieldError message={errors.lastName?.message} />
                       </div>
                     </div>
 
@@ -501,37 +560,45 @@ export function WebinarRegistrationModal({
                       <span className={labelClassName}>
                         He / She <RequiredMark />
                       </span>
-                      <div className="grid grid-cols-2 gap-3">
-                        {(["he", "she"] as const).map((value) => (
-                          <label
-                            key={value}
-                            className={cn(
-                              "inline-flex cursor-pointer items-center justify-center rounded-sm border border-dashed px-3 py-2.5 text-sm font-medium transition",
-                              form.pronoun === value
-                                ? "border-zinc-900 bg-zinc-900 text-white shadow-sm"
-                                : "border-zinc-200 bg-zinc-50/60 text-zinc-700 hover:border-zinc-300 hover:bg-white",
-                            )}
-                          >
-                            <input
-                              type="radio"
-                              name="pronoun"
-                              value={value}
-                              required
-                              checked={form.pronoun === value}
-                              onChange={() => updateField("pronoun", value)}
-                              className="sr-only"
-                            />
-                            <span className="inline-flex items-center gap-2">
-                              {value === "he" ? "He" : "She"}
-                              {value === "he" ? (
-                                <GenderMaleIcon />
-                              ) : (
-                                <GenderFemaleIcon />
-                              )}
-                            </span>
-                          </label>
-                        ))}
-                      </div>
+                      <Controller
+                        name="gender"
+                        control={control}
+                        rules={{ required: "Please select He or She." }}
+                        render={({ field }) => (
+                          <div className="grid grid-cols-2 gap-3">
+                            {(["he", "she"] as const).map((value) => (
+                              <label
+                                key={value}
+                                className={cn(
+                                  "inline-flex cursor-pointer items-center justify-center rounded-sm border border-dashed px-3 py-2.5 text-sm font-medium transition",
+                                  field.value === value
+                                    ? "border-zinc-900 bg-zinc-900 text-white shadow-sm"
+                                    : "border-zinc-200 bg-zinc-50/60 text-zinc-700 hover:border-zinc-300 hover:bg-white",
+                                )}
+                              >
+                                <input
+                                  type="radio"
+                                  name="gender"
+                                  value={value}
+                                  checked={field.value === value}
+                                  onChange={() => field.onChange(value)}
+                                  onBlur={field.onBlur}
+                                  className="sr-only"
+                                />
+                                <span className="inline-flex items-center gap-2">
+                                  {value === "he" ? "He" : "She"}
+                                  {value === "he" ? (
+                                    <GenderMaleIcon />
+                                  ) : (
+                                    <GenderFemaleIcon />
+                                  )}
+                                </span>
+                              </label>
+                            ))}
+                          </div>
+                        )}
+                      />
+                      <FieldError message={errors.gender?.message} />
                     </div>
                   </FormSection>
 
@@ -544,12 +611,20 @@ export function WebinarRegistrationModal({
                         <input
                           id="email"
                           type="email"
-                          required
-                          value={form.email}
-                          onChange={(e) => updateField("email", e.target.value)}
-                          className={inputClassName}
                           autoComplete="email"
+                          className={cn(
+                            inputClassName,
+                            errors.email && "border-red-300 bg-red-50/40",
+                          )}
+                          {...register("email", {
+                            required: "Email is required.",
+                            pattern: {
+                              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                              message: "Please enter a valid email address.",
+                            },
+                          })}
                         />
+                        <FieldError message={errors.email?.message} />
                       </div>
                       <div>
                         <label htmlFor="mobile" className={labelClassName}>
@@ -558,12 +633,16 @@ export function WebinarRegistrationModal({
                         <input
                           id="mobile"
                           type="tel"
-                          required
-                          value={form.mobile}
-                          onChange={(e) => updateField("mobile", e.target.value)}
-                          className={inputClassName}
                           autoComplete="tel"
+                          className={cn(
+                            inputClassName,
+                            errors.mobile && "border-red-300 bg-red-50/40",
+                          )}
+                          {...register("mobile", {
+                            required: "Mobile number is required.",
+                          })}
                         />
+                        <FieldError message={errors.mobile?.message} />
                       </div>
                     </div>
                   </FormSection>
@@ -575,15 +654,19 @@ export function WebinarRegistrationModal({
                       </label>
                       <select
                         id="background"
-                        required
-                        value={form.background}
-                        onChange={(e) => {
-                          updateField("background", e.target.value);
-                          if (e.target.value !== "Other") {
-                            updateField("backgroundOther", "");
-                          }
-                        }}
-                        className={cn(inputClassName, "appearance-none")}
+                        className={cn(
+                          inputClassName,
+                          "appearance-none",
+                          errors.background && "border-red-300 bg-red-50/40",
+                        )}
+                        {...register("background", {
+                          required: "Please select your current background.",
+                          onChange: (event) => {
+                            if (event.target.value !== "Other") {
+                              setValue("backgroundOther", "");
+                            }
+                          },
+                        })}
                       >
                         <option value="" disabled>
                           Select your current background
@@ -594,6 +677,7 @@ export function WebinarRegistrationModal({
                           </option>
                         ))}
                       </select>
+                      <FieldError message={errors.background?.message} />
                     </div>
 
                     <AnimatePresence>
@@ -611,14 +695,20 @@ export function WebinarRegistrationModal({
                           </label>
                           <input
                             id="backgroundOther"
-                            required
-                            value={form.backgroundOther}
-                            onChange={(e) =>
-                              updateField("backgroundOther", e.target.value)
-                            }
-                            className={inputClassName}
                             placeholder="Enter your background"
+                            className={cn(
+                              inputClassName,
+                              errors.backgroundOther &&
+                                "border-red-300 bg-red-50/40",
+                            )}
+                            {...register("backgroundOther", {
+                              validate: (value, formValues) =>
+                                formValues.background !== "Other" ||
+                                value.trim() !== "" ||
+                                "Please specify your background.",
+                            })}
                           />
+                          <FieldError message={errors.backgroundOther?.message} />
                         </motion.div>
                       ) : null}
                     </AnimatePresence>
@@ -635,14 +725,25 @@ export function WebinarRegistrationModal({
                         type="number"
                         min={0}
                         max={60}
-                        required
-                        value={form.yearsOfExperience}
-                        onChange={(e) =>
-                          updateField("yearsOfExperience", e.target.value)
-                        }
-                        className={inputClassName}
                         placeholder="e.g. 3"
+                        className={cn(
+                          inputClassName,
+                          errors.yearsOfExperience &&
+                            "border-red-300 bg-red-50/40",
+                        )}
+                        {...register("yearsOfExperience", {
+                          required: "Years of experience is required.",
+                          min: {
+                            value: 0,
+                            message: "Years of experience must be 0 or more.",
+                          },
+                          max: {
+                            value: 60,
+                            message: "Years of experience must be 60 or less.",
+                          },
+                        })}
                       />
+                      <FieldError message={errors.yearsOfExperience?.message} />
                     </div>
                   </FormSection>
 
@@ -654,32 +755,80 @@ export function WebinarRegistrationModal({
                       >
                         Preferred date &amp; time for call <RequiredMark />
                       </label>
-                      <DatePicker
-                        id="preferredCallDateTime"
-                        selected={form.preferredCallDateTime}
-                        onChange={(date: Date | null) => {
-                          updateField("preferredCallDateTime", date);
-                          if (date) setDateError(false);
+                      <Controller
+                        name="preferredCallDateTime"
+                        control={control}
+                        rules={{
+                          required: "Please select a preferred date and time.",
+                          validate: (value) => {
+                            if (!value) return true;
+                            if (!activeWebinar) {
+                              return "Please select a webinar first.";
+                            }
+                            if (!preferredCallWindowOpen) {
+                              return "Call scheduling is no longer available for this webinar.";
+                            }
+
+                            if (!isPreferredCallTimeValid(value, preferredCallBounds)) {
+                              if (value.getTime() < preferredCallBounds.min.getTime()) {
+                                return "Please select a future date and time.";
+                              }
+                              return "Call must be scheduled at least 12 hours before the webinar.";
+                            }
+
+                            return true;
+                          },
                         }}
-                        showTimeSelect
-                        timeFormat="HH:mm"
-                        timeIntervals={15}
-                        dateFormat="MMMM d, yyyy h:mm aa"
-                        minDate={new Date()}
-                        placeholderText="Select date and time"
-                        className={cn(
-                          inputClassName,
-                          "webinar-datepicker",
-                          dateError && "border-red-300 bg-red-50/40",
+                        render={({ field }) => (
+                          <DatePicker
+                            id="preferredCallDateTime"
+                            selected={field.value}
+                            onChange={field.onChange}
+                            onBlur={field.onBlur}
+                            showTimeSelect
+                            timeFormat="HH:mm"
+                            timeIntervals={15}
+                            dateFormat="MMMM d, yyyy h:mm aa"
+                            minDate={preferredCallBounds.min}
+                            maxDate={preferredCallBounds.maxDate ?? undefined}
+                            filterTime={(time) =>
+                              isPreferredCallTimeValid(time, preferredCallBounds)
+                            }
+                            disabled={
+                              !activeWebinar || !preferredCallWindowOpen
+                            }
+                            placeholderText={
+                              !activeWebinar
+                                ? "Select a webinar first"
+                                : !preferredCallWindowOpen
+                                  ? "Scheduling closed for this webinar"
+                                  : "Select date and time"
+                            }
+                            className={cn(
+                              inputClassName,
+                              "webinar-datepicker",
+                              errors.preferredCallDateTime &&
+                                "border-red-300 bg-red-50/40",
+                            )}
+                            popperClassName="webinar-datepicker-popper"
+                            wrapperClassName="w-full"
+                          />
                         )}
-                        popperClassName="webinar-datepicker-popper"
-                        wrapperClassName="w-full"
                       />
-                      {dateError ? (
-                        <p className="mt-1.5 text-xs font-medium text-red-600">
-                          Please select a preferred date and time.
+                      {activeWebinar && preferredCallWindowOpen ? (
+                        <p className="mt-1.5 text-xs text-zinc-500">
+                          Choose any date up to the webinar day. On earlier
+                          dates, any time is available. On the webinar day,
+                          select a time up to{" "}
+                          {formatPreferredCallDeadline(
+                            activeWebinar.scheduledAt,
+                          )}{" "}
+                          (12 hours before the webinar).
                         </p>
                       ) : null}
+                      <FieldError
+                        message={errors.preferredCallDateTime?.message}
+                      />
                     </div>
 
                     <div>
@@ -695,12 +844,9 @@ export function WebinarRegistrationModal({
                       <textarea
                         id="specificQuestion"
                         rows={3}
-                        value={form.specificQuestion}
-                        onChange={(e) =>
-                          updateField("specificQuestion", e.target.value)
-                        }
-                        className={cn(inputClassName, "resize-none")}
                         placeholder="Share anything you'd like us to know..."
+                        className={cn(inputClassName, "resize-none")}
+                        {...register("specificQuestion")}
                       />
                     </div>
                   </FormSection>
@@ -710,21 +856,27 @@ export function WebinarRegistrationModal({
 
             {!submitted ? (
               <div className="relative z-10 shrink-0 border-t border-dashed border-zinc-200 px-4 py-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:px-6">
+                {submitError ? (
+                  <p className="mb-3 text-center text-sm text-red-600 sm:text-left">
+                    {submitError}
+                  </p>
+                ) : null}
                 <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
                   <button
                     type="button"
                     onClick={onClose}
-                    className="rounded-xl border border-dashed border-zinc-200 bg-white px-5 py-2.5 text-sm font-medium text-zinc-700 transition hover:border-zinc-300 hover:bg-zinc-50"
+                    disabled={isSubmitting}
+                    className="rounded-xl border border-dashed border-zinc-200 bg-white px-5 py-2.5 text-sm font-medium text-zinc-700 transition hover:border-zinc-300 hover:bg-zinc-50 disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     form="webinar-registration-form"
-                    disabled={upcomingWebinars.length === 0}
+                    disabled={upcomingWebinars.length === 0 || isSubmitting}
                     className="rounded-xl border border-zinc-900 bg-zinc-900 px-5 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-zinc-800 disabled:cursor-not-allowed disabled:border-zinc-300 disabled:bg-zinc-300"
                   >
-                    Submit Registration
+                    {isSubmitting ? "Submitting..." : "Submit Registration"}
                   </button>
                 </div>
               </div>

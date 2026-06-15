@@ -2,11 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { Container } from "@/components/shared/Container";
 import GradientText from "@/components/ui/GradientText";
 import ShinyText from "@/components/ui/ShinyText";
 import { cn } from "@/lib/cn";
+import { submitForm } from "@/lib/submit-form";
 
 const exploreLinks = [
   { label: "Webinars", href: "#webinars" },
@@ -132,21 +134,37 @@ export function FooterSection() {
 }
 
 function NewsletterSignup() {
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "submitting" | "success" | "error"
+  >("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<{ email: string }>({
+    defaultValues: { email: "" },
+  });
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  const onSubmit = async ({ email }: { email: string }) => {
+    setStatus("submitting");
+    setErrorMessage("");
 
-    if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    const result = await submitForm({
+      formType: "newsletter",
+      email,
+    });
+
+    if (!result.success) {
       setStatus("error");
+      setErrorMessage(result.error);
       return;
     }
 
-    console.log("Newsletter signup:", email);
     setStatus("success");
-    setEmail("");
-  }
+    reset();
+  };
 
   return (
     <div className="relative overflow-hidden border border-dashed border-zinc-300 bg-white px-6 py-8 md:px-10 md:py-10">
@@ -171,27 +189,38 @@ function NewsletterSignup() {
         </div>
 
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(onSubmit)}
           className="w-full max-w-md shrink-0 space-y-2"
           noValidate
         >
           <div className="flex flex-col gap-2 sm:flex-row">
             <input
               type="email"
-              value={email}
-              onChange={(event) => {
-                setEmail(event.target.value);
-                if (status !== "idle") setStatus("idle");
-              }}
               placeholder="you@company.com"
               aria-label="Email address"
-              className={cn(inputClassName, "sm:flex-1")}
+              aria-invalid={errors.email ? "true" : "false"}
+              className={cn(
+                inputClassName,
+                "sm:flex-1",
+                errors.email && "border-red-300 bg-red-50/40",
+              )}
+              {...register("email", {
+                required: "Please enter a valid email address.",
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "Please enter a valid email address.",
+                },
+                onChange: () => {
+                  if (status !== "idle") setStatus("idle");
+                },
+              })}
             />
             <button
               type="submit"
-              className="inline-flex shrink-0 items-center justify-center rounded-xl border border-zinc-900 bg-zinc-900 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-zinc-800"
+              disabled={status === "submitting"}
+              className="inline-flex shrink-0 items-center justify-center rounded-xl border border-zinc-900 bg-zinc-900 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-zinc-800 disabled:cursor-not-allowed disabled:bg-zinc-500"
             >
-              Subscribe
+              {status === "submitting" ? "Subscribing..." : "Subscribe"}
             </button>
           </div>
           {status === "success" && (
@@ -199,11 +228,12 @@ function NewsletterSignup() {
               You&apos;re subscribed. Watch your inbox for updates.
             </p>
           )}
-          {status === "error" && (
-            <p className="text-xs text-red-600 md:text-sm">
-              Please enter a valid email address.
-            </p>
-          )}
+          {status === "error" && errorMessage ? (
+            <p className="text-xs text-red-600 md:text-sm">{errorMessage}</p>
+          ) : null}
+          {errors.email ? (
+            <p className="text-xs text-red-600 md:text-sm">{errors.email.message}</p>
+          ) : null}
         </form>
       </div>
     </div>
