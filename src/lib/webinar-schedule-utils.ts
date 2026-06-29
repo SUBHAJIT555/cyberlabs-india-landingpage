@@ -83,6 +83,28 @@ export function formatWebinarOptionLabel(webinar: WebinarSession): string {
   return `${formatWebinarDate(webinar.scheduledAt)} · ${formatWebinarTime(webinar.scheduledAt)} · ${webinar.topic}`;
 }
 
+export function splitWebinarTopic(topic: string): {
+  main: string;
+  focus: string;
+} {
+  const marker = " (";
+  const markerIndex = topic.lastIndexOf(marker);
+
+  if (markerIndex === -1 || !topic.endsWith(")")) {
+    return { main: topic, focus: "" };
+  }
+
+  return {
+    main: topic.slice(0, markerIndex),
+    focus: topic.slice(markerIndex),
+  };
+}
+
+export function extractFocusText(focus: string): string {
+  const normalized = focus.trim();
+  return normalized.replace(/^\(\s*Focus:\s*/i, "").replace(/\)$/, "").trim();
+}
+
 export function formatWebinarSpeakers(
   speakers: WebinarSession["speakers"],
 ): string {

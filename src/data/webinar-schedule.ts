@@ -69,56 +69,56 @@ export const upcomingWebinars: WebinarSession[] = [
     id: "future-skills-mncs-2026",
     scheduledAt: "2026-07-07T19:30:00+05:30",
     topic:
-      "The Future of Cybersecurity Careers: Skills MNCs Will Actually Pay For in 2026",
+      "The Future of Cybersecurity Careers: Skills MNCs Will Actually Pay For in 2026 (Focus: General Career Guidance & The Practitioner Blueprint)",
     speakers: defaultWebinarSpeakers,
   },
   {
     id: "modern-cyber-attacks",
     scheduledAt: "2026-07-09T19:30:00+05:30",
     topic:
-      "How Modern Cyber Attacks Actually Work: Lessons from Real-World Investigations",
+      "How Modern Cyber Attacks Actually Work: Lessons from Real-World Investigations (Focus: Threat Hunting & Enterprise Reality)",
     speakers: defaultWebinarSpeakers,
   },
   {
     id: "ai-vs-cybersecurity",
     scheduledAt: "2026-07-14T19:30:00+05:30",
     topic:
-      "AI vs Cybersecurity: Will Artificial Intelligence Replace Security Professionals?",
+      "AI vs Cybersecurity: Will Artificial Intelligence Replace Security Professionals? (Focus: AI Security & Future-proofing careers)",
     speakers: defaultWebinarSpeakers,
   },
   {
     id: "inside-dark-web",
     scheduledAt: "2026-07-16T19:30:00+05:30",
     topic:
-      "Inside the Dark Web: What Really Happens Beyond the Surface Internet",
+      "Inside the Dark Web: What Really Happens Beyond the Surface Internet (Focus: Dark Web Intelligence & Cybercrime)",
     speakers: defaultWebinarSpeakers,
   },
   {
     id: "why-companies-still-hacked",
     scheduledAt: "2026-07-21T19:30:00+05:30",
     topic:
-      "Why Companies Still Get Hacked Despite Spending Millions on Cybersecurity",
+      "Why Companies Still Get Hacked Despite Spending Millions on Cybersecurity (Focus: Detection Engineering & Operational Defense)",
     speakers: defaultWebinarSpeakers,
   },
   {
     id: "social-media-dark-side",
     scheduledAt: "2026-07-23T19:30:00+05:30",
     topic:
-      "The Dark Side of Social Media & Platforms: How Hackers Exploit Digital Identities",
+      "The Dark Side of Social Media & Platforms: How Hackers Exploit Digital Identities (Focus: Platform, Identity & Abuse Defense)",
     speakers: defaultWebinarSpeakers,
   },
   {
     id: "digital-fraud-crypto-scams",
     scheduledAt: "2026-07-28T19:30:00+05:30",
     topic:
-      "Digital Fraud & Cryptocurrency Scams: Following the Modern Money Trail",
+      "Digital Fraud & Cryptocurrency Scams: Following the Modern Money Trail (Focus: Crypto Investigations & Cybercrime)",
     speakers: defaultWebinarSpeakers,
   },
   {
     id: "ethical-hacking-threat-hunting",
     scheduledAt: "2026-08-04T19:30:00+05:30",
     topic:
-      "From Ethical Hacking to Threat Hunting: Understanding Modern Cyber Roles",
+      "From Ethical Hacking to Threat Hunting: Understanding Modern Cyber Roles (Focus: Closing the gap between outdated certs and real operations)",
     speakers: defaultWebinarSpeakers,
   },
 ];

@@ -10,11 +10,13 @@ import {
 } from "@/data/webinar-schedule";
 import {
   buildWebinarWhatsappUrl,
+  extractFocusText,
   formatWebinarDateWithWeekday,
   formatWebinarShortDate,
   formatWebinarTime,
   isWebinarPast,
   isWebinarRegistrationAvailable,
+  splitWebinarTopic,
 } from "@/lib/webinar-schedule-utils";
 import { useWebinarRegistration } from "@/context/webinar-registration";
 
@@ -175,6 +177,8 @@ function WebinarDetailsModalPanel({
   const shortDate = formatWebinarShortDate(webinar.scheduledAt);
   const whatsappUrl = buildWebinarWhatsappUrl(webinar);
   const { topicsLabel, speakersLabel } = webinarScheduleContent;
+  const { main, focus } = splitWebinarTopic(webinar.topic);
+  const focusText = extractFocusText(focus);
 
   const handleRegister = () => {
     onClose();
@@ -318,7 +322,13 @@ function WebinarDetailsModalPanel({
                     isPast ? "text-zinc-500" : "text-zinc-900",
                   )}
                 >
-                  {webinar.topic}
+                  {main}
+                  {focusText ? (
+                    <span className="mt-2 block text-base font-normal text-zinc-600 sm:text-lg">
+                      <span className="font-semibold text-zinc-700">Focus:</span>{" "}
+                      {focusText}
+                    </span>
+                  ) : null}
                 </p>
               </section>
 

@@ -14,11 +14,13 @@ import {
 } from "@/data/webinar-schedule";
 import {
   buildWebinarWhatsappUrl,
+  extractFocusText,
   formatWebinarDate,
   formatWebinarShortDate,
   formatWebinarTime,
   isWebinarPast,
   isWebinarRegistrationAvailable,
+  splitWebinarTopic,
 } from "@/lib/webinar-schedule-utils";
 
 const revealVariants = {
@@ -49,6 +51,8 @@ function WebinarDetailsBlock({
   isPast: boolean;
 }) {
   const { topicsLabel, speakersLabel } = webinarScheduleContent;
+  const { main, focus } = splitWebinarTopic(webinar.topic);
+  const focusText = extractFocusText(focus);
 
   return (
     <div className="space-y-3">
@@ -75,7 +79,13 @@ function WebinarDetailsBlock({
             isPast ? "text-zinc-500" : "text-zinc-900",
           )}
         >
-          {webinar.topic}
+          {main}
+          {focusText ? (
+            <span className="mt-2 block text-sm font-normal text-zinc-600">
+              <span className="font-semibold text-zinc-700">Focus:</span>{" "}
+              {focusText}
+            </span>
+          ) : null}
         </p>
       </div>
 
