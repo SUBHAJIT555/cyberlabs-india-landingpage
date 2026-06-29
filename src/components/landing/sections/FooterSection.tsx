@@ -9,6 +9,7 @@ import GradientText from "@/components/ui/GradientText";
 import ShinyText from "@/components/ui/ShinyText";
 import { cn } from "@/lib/cn";
 import { submitForm } from "@/lib/submit-form";
+import { WHATSAPP_URL } from "@/data/site-contact";
 
 const exploreLinks = [
   { label: "Webinars", href: "#webinars" },
@@ -75,6 +76,19 @@ export function FooterSection() {
                     external
                   >
                     Instagram
+                  </FooterLink>
+                </li>
+                <li>
+                  <FooterLink
+                    href="https://www.youtube.com/@cyberlabsindia"
+                    external
+                  >
+                    YouTube
+                  </FooterLink>
+                </li>
+                <li>
+                  <FooterLink href={WHATSAPP_URL} external>
+                    WhatsApp
                   </FooterLink>
                 </li>
               </ul>

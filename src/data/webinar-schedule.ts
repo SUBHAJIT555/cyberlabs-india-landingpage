@@ -4,14 +4,34 @@
  * Registration auto-closes once `scheduledAt` has passed.
  */
 
+export type WebinarSpeaker = {
+  name: string;
+  title: string;
+};
+
 export type WebinarSession = {
   id: string;
-  /** ISO 8601 datetime, e.g. "2026-06-10T19:00:00+05:30" for 7:00 PM IST */
+  /** ISO 8601 datetime, e.g. "2026-07-07T19:30:00+05:30" for 7:30 PM IST */
   scheduledAt: string;
   topic: string;
+  speakers: WebinarSpeaker[];
   /** Set to false to manually close registration before the session date */
   registrationOpen?: boolean;
 };
+
+/** Webinar WhatsApp — international format without + or spaces */
+export { WHATSAPP_NUMBER as webinarWhatsappNumber } from "@/data/site-contact";
+
+export const defaultWebinarSpeakers: WebinarSpeaker[] = [
+  {
+    name: "Guy Klisman",
+    title: "Founder & Chief Executive Officer, CYBERLABS",
+  },
+  {
+    name: "Najeeb Ibrahim",
+    title: "Chief Information Security Officer & Senior Instructor",
+  },
+];
 
 export const webinarScheduleContent = {
   eyebrow: "Upcoming Webinar Schedule",
@@ -22,10 +42,14 @@ export const webinarScheduleContent = {
   tableColumns: {
     date: "Date",
     time: "Time",
-    topic: "Webinar Topic",
+    details: "Webinar Details",
     action: "Registration",
   },
+  topicsLabel: "Topic:",
+  speakersLabel: "Speakers:",
   registerLabel: "Register Now",
+  whatsappLabel: "WhatsApp",
+  detailsModalEyebrow: "Webinar Session",
   sessionEndedLabel: "Session Ended",
   upcomingLabel: "Upcoming",
   completedLabel: "Completed",
@@ -41,50 +65,60 @@ export const backgroundOptions = [
 export type BackgroundOption = (typeof backgroundOptions)[number];
 
 export const upcomingWebinars: WebinarSession[] = [
-  // Past sessions (registration closed)
-
-  
   {
-    id: "future-careers",
-    scheduledAt: "2026-06-02T19:00:00+05:30",
-    topic: "The Future of Cybersecurity Careers",
+    id: "future-skills-mncs-2026",
+    scheduledAt: "2026-07-07T19:30:00+05:30",
+    topic:
+      "The Future of Cybersecurity Careers: Skills MNCs Will Actually Pay For in 2026",
+    speakers: defaultWebinarSpeakers,
   },
   {
-    id: "ai-security",
-    scheduledAt: "2026-06-05T19:00:00+05:30",
-    topic: "AI Security & The Future of Cyber Defense",
-  },
-
-
-  // Upcoming sessions
-  {
-    id: "dark-web",
-    scheduledAt: "2026-06-10T19:00:00+05:30",
-    topic: "Dark Web Intelligence & Cybercrime Trends",
+    id: "modern-cyber-attacks",
+    scheduledAt: "2026-07-09T19:30:00+05:30",
+    topic:
+      "How Modern Cyber Attacks Actually Work: Lessons from Real-World Investigations",
+    speakers: defaultWebinarSpeakers,
   },
   {
-    id: "detection-engineering",
-    scheduledAt: "2026-06-12T19:00:00+05:30",
-    topic: "Detection Engineering & Threat Hunting",
+    id: "ai-vs-cybersecurity",
+    scheduledAt: "2026-07-14T19:30:00+05:30",
+    topic:
+      "AI vs Cybersecurity: Will Artificial Intelligence Replace Security Professionals?",
+    speakers: defaultWebinarSpeakers,
   },
   {
-    id: "platform-security",
-    scheduledAt: "2026-06-17T19:00:00+05:30",
-    topic: "Platform Security & Trust & Safety",
+    id: "inside-dark-web",
+    scheduledAt: "2026-07-16T19:30:00+05:30",
+    topic:
+      "Inside the Dark Web: What Really Happens Beyond the Surface Internet",
+    speakers: defaultWebinarSpeakers,
   },
   {
-    id: "identity-zero-trust",
-    scheduledAt: "2026-06-19T19:00:00+05:30",
-    topic: "Identity Security & Zero Trust",
+    id: "why-companies-still-hacked",
+    scheduledAt: "2026-07-21T19:30:00+05:30",
+    topic:
+      "Why Companies Still Get Hacked Despite Spending Millions on Cybersecurity",
+    speakers: defaultWebinarSpeakers,
   },
   {
-    id: "future-skills",
-    scheduledAt: "2026-06-24T19:00:00+05:30",
-    topic: "Future Skills Cybersecurity Professionals Need",
+    id: "social-media-dark-side",
+    scheduledAt: "2026-07-23T19:30:00+05:30",
+    topic:
+      "The Dark Side of Social Media & Platforms: How Hackers Exploit Digital Identities",
+    speakers: defaultWebinarSpeakers,
   },
   {
-    id: "ask-professionals",
-    scheduledAt: "2026-06-26T19:00:00+05:30",
-    topic: "Ask the Cyber Professionals",
+    id: "digital-fraud-crypto-scams",
+    scheduledAt: "2026-07-28T19:30:00+05:30",
+    topic:
+      "Digital Fraud & Cryptocurrency Scams: Following the Modern Money Trail",
+    speakers: defaultWebinarSpeakers,
+  },
+  {
+    id: "ethical-hacking-threat-hunting",
+    scheduledAt: "2026-08-04T19:30:00+05:30",
+    topic:
+      "From Ethical Hacking to Threat Hunting: Understanding Modern Cyber Roles",
+    speakers: defaultWebinarSpeakers,
   },
 ];

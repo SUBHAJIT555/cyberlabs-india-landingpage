@@ -7,6 +7,7 @@ import { cn } from "@/lib/cn";
 import { ShinyButton } from "@/components/ui/shiny-button";
 import Shuffle from "@/components/ui/Shuffle";
 import { useWebinarRegistration } from "@/context/webinar-registration";
+import { WHATSAPP_URL } from "@/data/site-contact";
 import { AnimatePresence, motion } from "framer-motion";
 
 const exploreLinks = [
@@ -28,6 +29,16 @@ const followLinks = [
   {
     label: "Instagram",
     href: "https://www.instagram.com/cyberlabsindia",
+    external: true,
+  },
+  {
+    label: "YouTube",
+    href: "https://www.youtube.com/@cyberlabsindia",
+    external: true,
+  },
+  {
+    label: "WhatsApp",
+    href: WHATSAPP_URL,
     external: true,
   },
 ];

@@ -1,5 +1,6 @@
 import {
   upcomingWebinars,
+  webinarWhatsappNumber,
   type WebinarSession,
 } from "@/data/webinar-schedule";
 
@@ -7,6 +8,16 @@ const IST_TIMEZONE = "Asia/Kolkata";
 
 export function formatWebinarDate(scheduledAt: string): string {
   return new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    timeZone: IST_TIMEZONE,
+  }).format(new Date(scheduledAt));
+}
+
+export function formatWebinarDateWithWeekday(scheduledAt: string): string {
+  return new Intl.DateTimeFormat("en-US", {
+    weekday: "long",
     month: "long",
     day: "numeric",
     year: "numeric",
@@ -70,6 +81,43 @@ export function getUpcomingWebinars(
 
 export function formatWebinarOptionLabel(webinar: WebinarSession): string {
   return `${formatWebinarDate(webinar.scheduledAt)} · ${formatWebinarTime(webinar.scheduledAt)} · ${webinar.topic}`;
+}
+
+export function formatWebinarSpeakers(
+  speakers: WebinarSession["speakers"],
+): string {
+  return speakers
+    .map((speaker) => `${speaker.name} (${speaker.title})`)
+    .join(", ");
+}
+
+export function buildWebinarWhatsappUrl(webinar: WebinarSession): string {
+  const number = webinarWhatsappNumber.replace(/\D/g, "");
+  const date = formatWebinarDate(webinar.scheduledAt);
+  const time = formatWebinarTime(webinar.scheduledAt);
+  const speakers = webinar.speakers
+    .map((speaker) => `${speaker.name} (${speaker.title})`)
+    .join("\n");
+
+  const message = `Hello CYBERLABS India,
+
+I would like to register for the following webinar:
+
+*Topic:* ${webinar.topic}
+*Date:* ${date}
+*Time:* ${time}
+*Speakers:*
+${speakers}
+
+Please share the registration details. Thank you!`;
+
+  const encodedMessage = encodeURIComponent(message);
+
+  if (number) {
+    return `https://wa.me/${number}?text=${encodedMessage}`;
+  }
+
+  return `https://api.whatsapp.com/send?text=${encodedMessage}`;
 }
 
 const PREFERRED_CALL_BUFFER_MS = 12 * 60 * 60 * 1000;
