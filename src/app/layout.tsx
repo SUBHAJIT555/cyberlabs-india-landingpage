@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Cyberlabs India | Free Cybersecurity Career Guidance Webinars",
+  title: "CYBERLABS INDIA | Free Cybersecurity Career Guidance Webinars",
   description:
     "Join free live online career guidance and industry insight webinars from CYBERLABS INDIA. Understand where cybersecurity is going, discover where you fit, and learn from professionals who defend the digital world.",
   icons: {

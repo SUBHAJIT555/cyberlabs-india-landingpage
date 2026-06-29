@@ -99,7 +99,7 @@ export function buildWebinarWhatsappUrl(webinar: WebinarSession): string {
     .map((speaker) => `${speaker.name} (${speaker.title})`)
     .join("\n");
 
-  const message = `Hello CYBERLABS India,
+  const message = `Hello CYBERLABS INDIA,
 
 I would like to register for the following webinar:
 

@@ -332,7 +332,7 @@ export function WebinarScheduleSection() {
       ref={timelineRef}
       className=" px-4 py-16 md:py-24"
     >
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         <TimelineContent
           as="div"
           animationNum={1}

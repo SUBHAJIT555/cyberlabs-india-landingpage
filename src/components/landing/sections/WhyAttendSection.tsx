@@ -191,7 +191,7 @@ export function WhyAttendSection() {
 
   return (
     <section id="why" ref={timelineRef} className="bg-white px-4 py-16 md:py-24">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         {/* Intro: narrative + image */}
         <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-14">
           <div>

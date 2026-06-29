@@ -235,11 +235,11 @@ export function LandingNavbar() {
         <Link
           href="#home"
           className="inline-flex items-center"
-          aria-label="Cyberlabs India home"
+          aria-label="CYBERLABS INDIA home"
         >
           <Image
             src="/logo/cyberlabs-logo.svg"
-            alt="Cyberlabs India"
+            alt="CYBERLABS INDIA"
             width={180}
             height={40}
             priority

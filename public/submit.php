@@ -291,7 +291,7 @@ $utm_content = v('utm_content');
 
 
 
-// --- SMTP CONFIG (replace with your CYBERLABS India SMTP) ---
+// --- SMTP CONFIG (replace with your CYBERLABS INDIA SMTP) ---
 $smtpHost = 'box2368.bluehost.com';
 $smtpUser = 'admin@cyberlabs-india.com';
 $smtpPass = 'Admin@Cyberlabs@9474';
@@ -315,25 +315,25 @@ $border = '#e5e7eb';
 // --- Subject ---
 switch ($formType) {
     case 'contact':
-        $subject = "New Contact Inquiry – " . clean($name) . " – CYBERLABS India";
+        $subject = "New Contact Inquiry – " . clean($name) . " – CYBERLABS INDIA";
         break;
     case 'request-callback':
-        $subject = "New Request Callback – " . clean($name) . " – CYBERLABS India";
+        $subject = "New Request Callback – " . clean($name) . " – CYBERLABS INDIA";
         break;
     case 'newsletter':
-        $subject = "New Newsletter Signup – " . clean($email) . " – CYBERLABS India";
+        $subject = "New Newsletter Signup – " . clean($email) . " – CYBERLABS INDIA";
         break;
     case 'callback-modal':
-        $subject = "New Callback Request – " . clean($name) . " – CYBERLABS India";
+        $subject = "New Callback Request – " . clean($name) . " – CYBERLABS INDIA";
         break;
     case 'enrollment-modal':
-        $subject = "New Enrollment Request – " . clean($name) . " – CYBERLABS India";
+        $subject = "New Enrollment Request – " . clean($name) . " – CYBERLABS INDIA";
         break;
     case 'webinar-registration':
-        $subject = "New Webinar Registration – " . clean($name) . " – CYBERLABS India";
+        $subject = "New Webinar Registration – " . clean($name) . " – CYBERLABS INDIA";
         break;
     default:
-        $subject = "Form Submission – CYBERLABS India";
+        $subject = "Form Submission – CYBERLABS INDIA";
         break;
 }
 

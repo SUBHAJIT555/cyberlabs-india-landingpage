@@ -36,7 +36,7 @@ export function FooterSection() {
           <div className="md:col-span-5 lg:col-span-4">
             <Image
               src="/logo/cyberlabs-logo.svg"
-              alt="Cyberlabs India"
+              alt="CYBERLABS INDIA"
               width={180}
               height={40}
               className="h-10 w-auto"
@@ -122,7 +122,7 @@ export function FooterSection() {
               rel="noreferrer"
               className="font-medium text-zinc-700 transition hover:text-zinc-900"
             >
-              Cyberlabs India
+              CYBERLABS INDIA
             </a>{" "}
             | All rights reserved.
           </p>
