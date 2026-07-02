@@ -1,32 +1,43 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
+import { useState, type BaseSyntheticEvent, type ReactNode } from "react";
 import { useForm } from "react-hook-form";
 import { Container } from "@/components/shared/Container";
-import GradientText from "@/components/ui/GradientText";
+import { CandyButton } from "@/components/ui/candy-button";
 import ShinyText from "@/components/ui/ShinyText";
+import {
+  FacebookIcon,
+  HeartIcon,
+  InstagramIcon,
+  LinkedInIcon,
+  WhatsAppIcon,
+} from "@/components/ui/social-icons";
+import { YouTubeIcon } from "@/components/ui/YouTubeIcon";
+import { CONTACT } from "@/data/contact-info";
+import {
+  MAIN_SITE_URL,
+  mainSiteLegalLinks,
+  mainSiteSocialLinks,
+  mainSiteUrl,
+  mainSiteUsefulLinks,
+} from "@/data/main-site";
 import { cn } from "@/lib/cn";
 import { submitForm } from "@/lib/submit-form";
-import { WHATSAPP_URL } from "@/data/site-contact";
 
-const exploreLinks = [
-  { label: "Webinars", href: "#webinars" },
-  { label: "Why", href: "#why" },
-  { label: "Expertise", href: "#expertise" },
-  { label: "Career", href: "#career" },
-  { label: "Topics", href: "#topics" },
-  { label: "Audience", href: "#audience" },
+const socialCandyClass = "h-10 w-10 rounded-lg! px-0! py-0! shadow-none!";
 
-];
-
-const inputClassName =
-  "w-full rounded-xl border border-dashed border-zinc-200 bg-zinc-50/60 px-3.5 py-2.5 text-sm text-zinc-900 outline-none transition placeholder:text-zinc-400 focus:border-zinc-400 focus:bg-white focus:ring-2 focus:ring-zinc-200/80";
+const socialIconMap = {
+  Instagram: InstagramIcon,
+  Facebook: FacebookIcon,
+  YouTube: YouTubeIcon,
+  LinkedIn: LinkedInIcon,
+  WhatsApp: WhatsAppIcon,
+} as const;
 
 export function FooterSection() {
   return (
-    <footer className="relative overflow-hidden border-t border-zinc-200 bg-zinc-50/80">
+    <footer className="relative z-0 overflow-hidden border-t border-zinc-200 bg-zinc-50/80">
       <FooterBackground />
 
       <Container className="relative z-10 max-w-7xl py-12 md:py-16">
@@ -34,76 +45,90 @@ export function FooterSection() {
 
         <div className="mt-10 grid gap-10 md:mt-14 md:grid-cols-12 md:gap-8 lg:gap-10">
           <div className="md:col-span-5 lg:col-span-4">
-            <Image
-              src="/logo/cyberlabs-logo.svg"
-              alt="CYBERLABS INDIA"
-              width={180}
-              height={40}
-              className="h-10 w-auto"
-              style={{ width: "auto" }}
-            />
+            <a href={MAIN_SITE_URL} target="_blank" rel="noreferrer">
+              <Image
+                src="/logo/cyberlabs-logo.svg"
+                alt="CYBERLABS INDIA Logo"
+                width={180}
+                height={40}
+                className="h-10 w-auto"
+                style={{ width: "auto" }}
+              />
+            </a>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-zinc-600 md:text-base">
-              An Israeli Cyber Defense Training Ecosystem, Launched by Cyveritas
-              Technologies. Training Real Cyber Defenders for a Real World.
+              An Israeli Cyber Defense Training Ecosystem, Launched by{" "}
+              <span className="font-semibold text-zinc-800">
+                {CONTACT.registeredEntity.replace(" LLP", "")}.
+              </span>{" "}
+              Training Real Cyber Defenders for a Real World.
             </p>
-           
+
+            <FooterColumn title="Socials" className="mt-10 md:mt-12">
+              <div className="flex flex-wrap gap-2.5">
+                {mainSiteSocialLinks.map((item) => {
+                  const Icon =
+                    socialIconMap[item.label as keyof typeof socialIconMap];
+                  return (
+                    <CandyButton
+                      key={item.label}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={item.label}
+                      variant="white"
+                      className={socialCandyClass}
+                    >
+                      <Icon className="h-4 w-4 shrink-0" />
+                    </CandyButton>
+                  );
+                })}
+              </div>
+            </FooterColumn>
           </div>
 
-          <div className="grid gap-8 sm:grid-cols-3 md:col-span-7 lg:col-span-8">
-            <FooterColumn title="Explore">
+          <div className="grid gap-8 sm:grid-cols-2 md:col-span-7 md:grid-cols-3 lg:col-span-8">
+            <FooterColumn title="Useful Links">
               <ul className="space-y-2.5">
-                {exploreLinks.map((item) => (
-                  <li key={item.href}>
-                    <FooterLink href={item.href}>{item.label}</FooterLink>
+                {mainSiteUsefulLinks.map((item) => (
+                  <li key={item.path}>
+                    <FooterLink href={mainSiteUrl(item.path)}>
+                      {item.label}
+                    </FooterLink>
                   </li>
                 ))}
               </ul>
             </FooterColumn>
 
-            <FooterColumn title="Follow us on">
+            <FooterColumn title="Legals & Policies">
               <ul className="space-y-2.5">
-                <li>
-                  <FooterLink
-                    href="https://www.linkedin.com/company/cyberlabs-india/"
-                    external
-                  >
-                    LinkedIn
-                  </FooterLink>
-                </li>
-                <li>
-                  <FooterLink
-                    href="https://www.instagram.com/cyberlabsindia"
-                    external
-                  >
-                    Instagram
-                  </FooterLink>
-                </li>
-                <li>
-                  <FooterLink
-                    href="https://www.youtube.com/@cyberlabsindia"
-                    external
-                  >
-                    YouTube
-                  </FooterLink>
-                </li>
-                <li>
-                  <FooterLink href={WHATSAPP_URL} external>
-                    WhatsApp
-                  </FooterLink>
-                </li>
+                {mainSiteLegalLinks.map((item) => (
+                  <li key={item.label}>
+                    <FooterLink
+                      href={item.external ? item.path : mainSiteUrl(item.path)}
+                      external={item.external}
+                    >
+                      {item.label}
+                    </FooterLink>
+                  </li>
+                ))}
               </ul>
             </FooterColumn>
 
-            <FooterColumn title="Get in touch">
+            <FooterColumn title="Get in Touch">
               <ul className="space-y-2.5">
                 <li>
-                  <FooterLink href="mailto:education@cyberlabs-india.com">
-                    education@cyberlabs-india.com
+                  <FooterLink href={`mailto:${CONTACT.educationEmail}`}>
+                    {CONTACT.educationEmail}
                   </FooterLink>
                 </li>
                 <li>
-                  <FooterLink href="https://cyberlabs-india.com" external>
-                    cyberlabs-india.com
+                  <FooterLink href={mainSiteUrl("/request-callback")}>
+                    Request Call Back
+                  </FooterLink>
+                </li>
+                <li>
+                  <FooterLink href={mainSiteUrl("/contact-cyberlabs")}>
+                    Contact CYBERLABS
                   </FooterLink>
                 </li>
               </ul>
@@ -111,31 +136,37 @@ export function FooterSection() {
           </div>
         </div>
 
-       
-
         <div className="mt-8 flex flex-col items-center justify-between gap-3 border-t border-dashed border-zinc-200 pt-6 text-center text-xs text-zinc-500 md:flex-row md:text-left md:text-sm">
           <p>
             © {new Date().getFullYear()}{" "}
             <a
-              href="https://cyberlabs-india.com"
+              href={MAIN_SITE_URL}
               target="_blank"
               rel="noreferrer"
               className="font-medium text-zinc-700 transition hover:text-zinc-900"
             >
               CYBERLABS INDIA
             </a>{" "}
-            | All rights reserved.
+            | All rights reserved. |{" "}
+            <a
+              href={mainSiteUrl("/sitemap")}
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium text-zinc-700 underline underline-offset-2 transition hover:text-zinc-900"
+            >
+              Sitemap
+            </a>
           </p>
           <p className="inline-flex items-center justify-center gap-1 md:justify-end">
-            <span>Developed with</span>
-            <HeartIcon />
+            <span>Made with</span>
+            <HeartIcon className="h-3.5 w-3.5 shrink-0 text-zinc-500" />
             <span>
               by{" "}
               <a
                 href="https://subhajit-dhali.vercel.app/"
                 target="_blank"
                 rel="noreferrer"
-                className="font-medium text-zinc-700 transition hover:text-zinc-900"
+                className="font-medium text-zinc-700 underline underline-offset-2 transition hover:text-zinc-900"
               >
                 Subhajit
               </a>
@@ -161,13 +192,17 @@ function NewsletterSignup() {
     defaultValues: { email: "" },
   });
 
-  const onSubmit = async ({ email }: { email: string }) => {
+  const onSubmit = async (
+    data: { email: string },
+    event?: BaseSyntheticEvent,
+  ) => {
+    event?.preventDefault();
     setStatus("submitting");
     setErrorMessage("");
 
     const result = await submitForm({
       formType: "newsletter",
-      email,
+      email: data.email,
     });
 
     if (!result.success) {
@@ -197,8 +232,8 @@ function NewsletterSignup() {
             Stay ahead in cybersecurity
           </h3>
           <p className="mt-2 text-sm leading-relaxed text-zinc-600 md:text-base">
-            Get webinar schedules, career insights, and training updates delivered
-            to your inbox.
+            Stay updated with our latest news, industry insights, and exclusive
+            offers.
           </p>
         </div>
 
@@ -207,15 +242,14 @@ function NewsletterSignup() {
           className="w-full max-w-md shrink-0 space-y-2"
           noValidate
         >
+          <input type="hidden" name="formType" value="newsletter" />
           <div className="flex flex-col gap-2 sm:flex-row">
             <input
               type="email"
-              placeholder="you@company.com"
+              placeholder="Enter your email"
               aria-label="Email address"
-              aria-invalid={errors.email ? "true" : "false"}
               className={cn(
-                inputClassName,
-                "sm:flex-1",
+                "rounded-xl border border-zinc-200 px-4 py-2.5 text-sm text-zinc-900 shadow-2xl outline-none transition placeholder:text-zinc-400 focus:border-zinc-400 focus:bg-white focus:ring-2 focus:ring-zinc-200/80 sm:flex-1",
                 errors.email && "border-red-300 bg-red-50/40",
               )}
               {...register("email", {
@@ -229,13 +263,13 @@ function NewsletterSignup() {
                 },
               })}
             />
-            <button
+            <CandyButton
               type="submit"
               disabled={status === "submitting"}
-              className="inline-flex shrink-0 items-center justify-center rounded-xl border border-zinc-900 bg-zinc-900 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-zinc-800 disabled:cursor-not-allowed disabled:bg-zinc-500"
+              className="shrink-0 rounded-lg! border-zinc-800! bg-[radial-gradient(95%_60%_at_50%_75%,#18181b_0%,#27272a_100%)]! px-5! py-2.5! text-sm! text-white shadow-none! active:rotate-0 disabled:cursor-not-allowed disabled:border-zinc-300! disabled:bg-zinc-300! disabled:opacity-100"
             >
-              {status === "submitting" ? "Subscribing..." : "Subscribe"}
-            </button>
+              {status === "submitting" ? "Submitting..." : "Subscribe"}
+            </CandyButton>
           </div>
           {status === "success" && (
             <p className="text-xs text-emerald-600 md:text-sm">
@@ -246,7 +280,9 @@ function NewsletterSignup() {
             <p className="text-xs text-red-600 md:text-sm">{errorMessage}</p>
           ) : null}
           {errors.email ? (
-            <p className="text-xs text-red-600 md:text-sm">{errors.email.message}</p>
+            <p className="text-xs text-red-600 md:text-sm">
+              {errors.email.message}
+            </p>
           ) : null}
         </form>
       </div>
@@ -257,12 +293,14 @@ function NewsletterSignup() {
 function FooterColumn({
   title,
   children,
+  className,
 }: {
   title: string;
-  children: React.ReactNode;
+  children: ReactNode;
+  className?: string;
 }) {
   return (
-    <div>
+    <div className={className}>
       <p className="text-xs font-semibold uppercase tracking-[0.14em] text-zinc-800 md:text-sm">
         {title}
       </p>
@@ -279,65 +317,38 @@ function FooterLink({
   external,
 }: {
   href: string;
-  children: React.ReactNode;
+  children: ReactNode;
   external?: boolean;
 }) {
   const className =
     "group inline-flex w-fit items-center gap-1 text-sm text-zinc-600 transition hover:text-zinc-900 md:text-base";
+  const isExternal =
+    external || href.startsWith("http") || href.startsWith("mailto:");
 
-  if (external || href.startsWith("http") || href.startsWith("mailto:")) {
-    return (
-      <a
-        href={href}
-        target={external || href.startsWith("http") ? "_blank" : undefined}
-        rel={
-          external || href.startsWith("http") ? "noreferrer" : undefined
-        }
-        className={className}
-      >
-        <span>{children}</span>
-        <ArrowIcon />
-      </a>
-    );
-  }
-
-  return (
-    <Link href={href} className={className}>
-      <span>{children}</span>
-      <ArrowIcon />
-    </Link>
-  );
-}
-
-function SocialIconLink({
-  href,
-  label,
-  children,
-}: {
-  href: string;
-  label: string;
-  children: React.ReactNode;
-}) {
   return (
     <a
       href={href}
-      target="_blank"
-      rel="noreferrer"
-      aria-label={label}
-      className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-dashed border-zinc-200 bg-white text-zinc-600 transition hover:border-zinc-300 hover:bg-zinc-50 hover:text-zinc-900"
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noreferrer" : undefined}
+      className={className}
     >
       {children}
+      <ArrowIcon />
     </a>
   );
 }
 
 function FooterBackground() {
   return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+    <div
+      aria-hidden
+      className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
+    >
       <div
         className="absolute inset-0 opacity-[0.35]"
         style={{
-          backgroundImage: "linear-gradient(90deg, #e4e4e7 1px, transparent 1px)",
+          backgroundImage:
+            "linear-gradient(90deg, #e4e4e7 1px, transparent 1px)",
           backgroundSize: "10px 100%",
           WebkitMaskImage:
             "linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, transparent 65%)",
@@ -351,35 +362,30 @@ function FooterBackground() {
 
 function NewsletterBackground() {
   return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+    <div
+      aria-hidden
+      className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
+    >
       <div
-        className="absolute inset-0 opacity-30"
         style={{
-          backgroundImage:
-            "repeating-conic-gradient(from 0deg at 100% 0%, #d4d4d8 0deg, #d4d4d8 1deg, transparent 1deg, transparent 12deg)",
           WebkitMaskImage:
-            "linear-gradient(to left, rgba(0,0,0,0.5) 0%, transparent 55%)",
+            "linear-gradient(to bottom, transparent 0%, #000 30%, #000 100%)",
+          backgroundImage:
+            "linear-gradient(#e4e4e7 1px, transparent 1px), linear-gradient(90deg, #e4e4e7 1px, transparent 1px)",
+          backgroundSize: "40px 25px",
+          bottom: "0",
+          height: "60%",
+          left: "50%",
           maskImage:
-            "linear-gradient(to left, rgba(0,0,0,0.5) 0%, transparent 55%)",
+            "linear-gradient(to bottom, transparent 0%, #000 30%, #000 100%)",
+          opacity: 0.35,
+          pointerEvents: "none",
+          position: "absolute",
+          transform: "translateX(-50%) perspective(300px) rotateX(45deg)",
+          width: "150%",
         }}
       />
     </div>
-  );
-}
-
-
-
-function HeartIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      className="h-3.5 w-3.5 shrink-0 text-zinc-500"
-      aria-hidden="true"
-    >
-      <path d="M6.979 3.074a6 6 0 0 1 4.988 1.425l.037 .033l.034 -.03a6 6 0 0 1 4.733 -1.44l.246 .036a6 6 0 0 1 3.364 10.008l-.18 .185l-.048 .041l-7.45 7.379a1 1 0 0 1 -1.313 .082l-.094 -.082l-7.493 -7.422a6 6 0 0 1 3.176 -10.215z" />
-    </svg>
   );
 }
 

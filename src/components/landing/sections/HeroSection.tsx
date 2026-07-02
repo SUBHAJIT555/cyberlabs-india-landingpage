@@ -1,6 +1,5 @@
 "use client";
 
-import { useLenis } from "lenis/react";
 import { useRef } from "react";
 import { useWebinarRegistration } from "@/context/webinar-registration";
 import { TimelineContent } from "@/components/ui/timeline-animation";
@@ -8,6 +7,7 @@ import { ShinyButton } from "@/components/ui/shiny-button";
 import { FeatureCard } from "@/components/ui/feature-card";
 import GradientText from "@/components/ui/GradientText";
 import ShinyText from "@/components/ui/ShinyText";
+import { mainSiteUrl } from "@/data/main-site";
 
 const revealVariants = {
   visible: (i: number) => ({
@@ -245,7 +245,6 @@ function CloudSecurityIcon() {
 
 export function HeroSection() {
   const timelineRef = useRef<HTMLDivElement>(null);
-  const lenis = useLenis();
   const { openRegistration } = useWebinarRegistration();
 
   return (
@@ -278,7 +277,7 @@ export function HeroSection() {
             className="max-w-[20rem] sm:max-w-none"
           >
             <ShinyText
-              text="Free Cybersecurity Career Guidance & Industry Insight Webinars."
+              text="Free Career Guidance Webinars, Elite Bootcamps & Flagship Programs."
               className="text-balance text-[1.7rem] font-semibold leading-[1.12] tracking-tight sm:text-4xl sm:leading-[1.08] md:text-5xl xl:text-6xl"
               color="#3f3f46"
               shineColor="#18181b"
@@ -292,7 +291,7 @@ export function HeroSection() {
             animationNum={3}
             timelineRef={timelineRef}
             customVariants={revealVariants}
-            className="mx-auto max-w-72 px-1 font-medium sm:max-w-2xl sm:px-0"
+            className="mx-auto max-w-72 px-1 font-medium sm:max-w-3xl sm:px-0"
           >
             <GradientText
               className="text-[0.9rem] font-medium leading-relaxed sm:text-base md:text-lg"
@@ -302,7 +301,9 @@ export function HeroSection() {
               showBorder={false}
               pauseOnHover={false}
             >
-              Understand Where Cybersecurity Is Going. Discover Where You Fit.
+              Join free cybersecurity career guidance webinars, train through elite
+              bootcamps, and build deep capability with flagship cyber defense
+              programs — all from CYBERLABS INDIA.
             </GradientText>
           </TimelineContent>
 
@@ -317,13 +318,19 @@ export function HeroSection() {
               onClick={() => openRegistration()}
               className="shiny-cta--compact w-full rounded-xl! px-6! py-3.5! text-sm! shadow-lg! shadow-zinc-800/20! sm:w-auto sm:rounded-lg! sm:px-4! sm:py-2.5!"
             >
-              Register Now
+              Register for Webinars
             </ShinyButton>
             <ShinyButton
-              onClick={() => lenis?.scrollTo("#webinars", { offset: -64 })}
+              onClick={() =>
+                window.open(
+                  mainSiteUrl("/cyber-defense-programs"),
+                  "_blank",
+                  "noopener,noreferrer",
+                )
+              }
               className="shiny-cta--compact shiny-cta--light w-full rounded-xl! px-6! py-3.5! text-sm! shadow-lg! shadow-zinc-800/20! sm:w-auto sm:rounded-lg! sm:px-4! sm:py-2.5!"
             >
-              View Webinars
+              Explore Programs & Bootcamps
             </ShinyButton>
           </TimelineContent>
 

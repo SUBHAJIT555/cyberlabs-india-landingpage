@@ -1,6 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Allow opening the dev server via LAN IP (e.g. http://10.x.x.x:3000)
+  allowedDevOrigins: ["10.226.139.76"],
+  turbopack: {
+    root: process.cwd(),
+  },
   images: {
     remotePatterns: [
       {

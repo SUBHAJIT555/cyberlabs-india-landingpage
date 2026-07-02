@@ -6,8 +6,20 @@ import { motion } from "framer-motion";
 import { useWebinarRegistration } from "@/context/webinar-registration";
 import ReactCountryFlag from "react-country-flag";
 import { TimelineContent } from "@/components/ui/timeline-animation";
-import { ShinyButton } from "@/components/ui/shiny-button";
+import { CandyButton } from "@/components/ui/candy-button";
 import ShinyText from "@/components/ui/ShinyText";
+import GradientText from "@/components/ui/GradientText";
+import { mainSiteUrl } from "@/data/main-site";
+import { crosshatchBgStyle } from "@/lib/crosshatch-bg";
+
+const pathwayTitleGradientProps = {
+  className: "text-base font-semibold md:text-lg",
+  colors: ["#52525b", "#2563eb", "#3f3f46", "#1d4ed8", "#52525b"],
+  animationSpeed: 4,
+  direction: "horizontal" as const,
+  showBorder: false,
+  pauseOnHover: false,
+};
 
 const markets = [
   { code: "IN", label: "India" },
@@ -47,11 +59,11 @@ const specializations = [
 
 const careerQuestions = [
   "Which cybersecurity specialization is right for me?",
+  "Should I start with an elite bootcamp or a flagship program?",
   "Which skills are organizations actively hiring for?",
-  "Which career paths offer the strongest future?",
-  "How do I transition into cybersecurity successfully?",
+  "How do free career guidance webinars help me choose a path?",
   "What skills will remain relevant in the age of AI?",
-  "How do I build a long-term cybersecurity career?",
+  "How do I build a long-term cyber defense career?",
 ];
 
 const revealVariants = {
@@ -85,6 +97,26 @@ function InsightImage({ src, alt, className }: { src: string; alt: string; class
   );
 }
 
+function PathwayCard({ title, description }: { title: string; description: string }) {
+  return (
+    <div className="relative overflow-hidden border border-dashed border-zinc-200 bg-white">
+      <div
+        className="pointer-events-none absolute inset-0 z-0"
+        style={crosshatchBgStyle}
+        aria-hidden
+      />
+      <div className="relative z-10 p-5 md:p-6">
+        <GradientText {...pathwayTitleGradientProps} className="font-bold!">
+          {title}
+        </GradientText>
+        <p className="mt-3 text-base leading-relaxed text-zinc-600 font-medium md:text-[17px]">
+          {description}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export function WebinarInsightsSection() {
   const timelineRef = useRef<HTMLDivElement>(null);
   const { openRegistration } = useWebinarRegistration();
@@ -92,7 +124,7 @@ export function WebinarInsightsSection() {
   return (
     <section id="services" ref={timelineRef} className="bg-white px-4 py-14 md:py-20">
       <div className="mx-auto max-w-7xl divide-y divide-zinc-200">
-        {/* Row 1 — text | image */}
+        {/* Row 1  -  text | image */}
         <div className="grid grid-cols-1 md:grid-cols-2 md:divide-x md:divide-zinc-200">
           <TimelineContent
             as="article"
@@ -103,7 +135,7 @@ export function WebinarInsightsSection() {
           >
             <h2 className="text-pretty">
               <ShinyText
-                text="The cybersecurity industry is evolving faster than ever before."
+                text="Israeli-Led Cyber Defense Training for India's Professionals."
                 className="text-xl font-semibold leading-snug sm:text-2xl md:text-4xl"
                 color="#3f3f46"
                 shineColor="#18181b"
@@ -112,10 +144,11 @@ export function WebinarInsightsSection() {
               />
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-zinc-700 md:text-base">
-              Artificial Intelligence, Deepfakes, Digital Identity Fraud, Social
-              Media Manipulation, Platform Abuse, Online Scams, Cybercrime, and
-              emerging digital threats are transforming how organizations
-              operate, protect users, and defend critical infrastructure.
+              <span className="font-semibold">CYBERLABS INDIA</span> brings <span className="underline decoration-dotted underline-offset-4 decoration-blue-600">Israeli-led, simulation-driven cyber defense
+              training</span> to India - launched by <span className="font-semibold">Cyveritas Technologies</span>, in collaboration
+              with <span className="font-semibold">CYBERLABS USA</span>. We prepare professionals for the same threats
+              faced by global enterprises, institutions, and governments through
+              practical, operator-led learning - <span className="text-blue-600 font-medium">not theory alone</span>.
             </p>
           </TimelineContent>
 
@@ -128,13 +161,13 @@ export function WebinarInsightsSection() {
           >
             <InsightImage
               src={INSIGHT_IMAGES.industry}
-              alt="Cybersecurity industry illustration"
+              alt="CYBERLABS cyber defense training"
               className="h-[200px] w-full md:h-full md:min-h-[240px]"
             />
           </TimelineContent>
         </div>
 
-        {/* Row 2 — full width expertise */}
+        {/* Row 2  -  full width expertise */}
         <TimelineContent
           as="article"
           animationNum={3}
@@ -143,8 +176,8 @@ export function WebinarInsightsSection() {
           className="px-0 py-6 md:px-8 md:py-8"
         >
           <p className="text-base font-medium leading-relaxed text-zinc-800 md:text-lg">
-            Today&apos;s organizations are actively seeking professionals with
-            expertise in:
+            Through free Career Guidance Webinars, Elite Bootcamps, and Flagship
+            programs, CYBERLABS develops practical capability across:
           </p>
      
           <div className="mt-4 flex flex-wrap gap-2">
@@ -161,7 +194,7 @@ export function WebinarInsightsSection() {
           </div>
         </TimelineContent>
 
-        {/* Row 3 — questions | image */}
+        {/* Row 3  -  questions | image */}
         <div className="grid grid-cols-1 md:grid-cols-2 md:divide-x md:divide-zinc-200">
           <TimelineContent
             as="article"
@@ -174,7 +207,7 @@ export function WebinarInsightsSection() {
 
             
             <p className="text-sm leading-relaxed text-zinc-800 md:text-base">
-              As demand continues to grow across{" "}
+              As demand grows across{" "}
               {markets.map((market, index) => (
                 <span key={market.code}>
                   <ReactCountryFlag
@@ -193,7 +226,8 @@ export function WebinarInsightsSection() {
                   {index < markets.length - 1 ? ", " : " "}
                 </span>
               ))}
-              and other global markets, many professionals are still asking:
+              and other global markets, professionals are asking how to choose
+              the right path into cyber defense:
             </p>
             <ul className="mt-4">
               {careerQuestions.map((question, index) => (
@@ -219,38 +253,62 @@ export function WebinarInsightsSection() {
           >
             <InsightImage
               src={INSIGHT_IMAGES.questions}
-              alt="Career questions illustration"
+              alt="Cyber defense career pathways"
               className="h-[200px] w-full md:h-full md:min-h-[240px]"
             />
           </TimelineContent>
         </div>
 
-        {/* Row 4 — full width webinar */}
+        {/* Row 4  -  learning pathways */}
         <TimelineContent
           as="article"
           animationNum={6}
           timelineRef={timelineRef}
           customVariants={revealVariants}
-          className="px-0 py-6 md:px-8 md:py-8 text-center items-center justify-center max-w-6xl mx-auto"
+          className="mx-auto max-w-6xl items-center justify-center px-0 py-6 text-center md:px-8 md:py-8"
         >
-          <p className="text-base leading-relaxed text-zinc-700 md:text-lg font-medium">
-            To help answer these questions, CYBERLABS INDIA conducts regular FREE
-            Cybersecurity Career Guidance & Industry Insight Webinars, led by
-            cybersecurity professionals actively working within the industry.
+          <p className="text-base font-semibold leading-relaxed text-blue-600 md:text-lg">
+            CYBERLABS INDIA offers a complete pathway - from free guidance to
+            advanced training:
           </p>
-     
-          <p className="mt-4 text-sm leading-relaxed text-zinc-700 md:text-base max-w-2xl mx-auto">
-            These sessions are designed to help you understand the realities of
-            modern cybersecurity, emerging career opportunities, industry trends,
-            and the skills that organizations actually value.
+
+          <div className="mx-auto mt-6 grid max-w-5xl gap-5 text-left sm:grid-cols-3">
+            <PathwayCard
+              title="Free Career Guidance Webinars"
+              description="Live sessions led by working cyber professionals to help you understand the industry, emerging roles, and where you fit."
+            />
+            <PathwayCard
+              title="Elite Boot Camps"
+              description="Intensive 30–50 hour programs focused on high-demand specializations - built for working professionals who need focused, practical expertise fast."
+            />
+            <PathwayCard
+              title="Flagship Programs"
+              description="Immersive 145–450 hour pathways that build deep operational capability for specialized and leadership-oriented cyber defense roles."
+            />
+          </div>
+
+          <p className="mx-auto mt-6 max-w-3xl text-sm leading-relaxed text-zinc-700 md:text-base">
+            Focused on skills over certifications alone, CYBERLABS helps you
+            understand the industry, build relevant capability, and develop a
+            successful long-term career in cyber defense.
           </p>
-          <div className="mt-6">
-            <ShinyButton
+
+          <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <CandyButton
+              type="button"
               onClick={() => openRegistration()}
-              className="shiny-cta rounded-2xl! shadow-lg! shadow-zinc-800/20! text-sm!"
+              className="w-full rounded-lg! border-zinc-800! bg-[radial-gradient(95%_60%_at_50%_75%,#18181b_0%,#27272a_100%)]! px-6! py-3! text-sm! text-white shadow-none! active:rotate-0 sm:w-auto"
             >
-              REGISTER FOR THE NEXT WEBINAR
-            </ShinyButton>
+              Register for Webinars
+            </CandyButton>
+            <CandyButton
+              href={mainSiteUrl("/cyber-defense-programs")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full rounded-lg! border-zinc-400! bg-[radial-gradient(95%_60%_at_50%_75%,#52525b_0%,#71717a_100%)]! px-6! py-3! text-sm! text-white shadow-none! active:rotate-0 sm:w-auto"
+            >
+              Explore Programs & Bootcamps
+            </CandyButton>
           </div>
         </TimelineContent>
       </div>
