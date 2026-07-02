@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import GradientText from "@/components/ui/GradientText";
+import { CandyButton } from "@/components/ui/candy-button";
 import {
   backgroundOptions,
   type WebinarSession,
@@ -862,22 +863,23 @@ export function WebinarRegistrationModal({
                   </p>
                 ) : null}
                 <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
-                  <button
+                  <CandyButton
                     type="button"
+                    variant="white"
                     onClick={onClose}
                     disabled={isSubmitting}
-                    className="rounded-xl border border-dashed border-zinc-200 bg-white px-5 py-2.5 text-sm font-medium text-zinc-700 transition hover:border-zinc-300 hover:bg-zinc-50 disabled:cursor-not-allowed disabled:opacity-60"
+                    className="rounded-lg! border-zinc-200! px-5! py-2.5! text-sm! shadow-none! disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     Cancel
-                  </button>
-                  <button
+                  </CandyButton>
+                  <CandyButton
                     type="submit"
                     form="webinar-registration-form"
                     disabled={upcomingWebinars.length === 0 || isSubmitting}
-                    className="rounded-xl border border-zinc-900 bg-zinc-900 px-5 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-zinc-800 disabled:cursor-not-allowed disabled:border-zinc-300 disabled:bg-zinc-300"
+                    className="rounded-lg! border-zinc-800! bg-[radial-gradient(95%_60%_at_50%_75%,#18181b_0%,#27272a_100%)]! px-5! py-2.5! text-sm! text-white shadow-none! active:rotate-0 disabled:cursor-not-allowed disabled:border-zinc-300! disabled:bg-zinc-300! disabled:opacity-100"
                   >
                     {isSubmitting ? "Submitting..." : "Submit Registration"}
-                  </button>
+                  </CandyButton>
                 </div>
               </div>
             ) : null}

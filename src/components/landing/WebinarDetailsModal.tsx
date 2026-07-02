@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import GradientText from "@/components/ui/GradientText";
+import { CandyButton } from "@/components/ui/candy-button";
 import {
   webinarScheduleContent,
   type WebinarSession,
@@ -290,14 +291,15 @@ function WebinarDetailsModalPanel({
                   </div>
                 </div>
 
-                <button
+                <CandyButton
                   type="button"
+                  variant="white"
                   onClick={onClose}
                   aria-label="Close"
-                  className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-dashed border-zinc-200 bg-white text-zinc-600 transition hover:border-zinc-300 hover:bg-zinc-50 hover:text-zinc-900"
+                  className="h-9 w-9 shrink-0 rounded-lg! px-0! py-0! shadow-none!"
                 >
                   <CloseIcon />
-                </button>
+                </CandyButton>
               </div>
             </div>
 
@@ -370,23 +372,23 @@ function WebinarDetailsModalPanel({
                 </button>
               ) : (
                 <div className="flex flex-col gap-2.5 sm:flex-row">
-                  <button
+                  <CandyButton
                     type="button"
                     onClick={handleRegister}
-                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-zinc-900 bg-zinc-900 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-zinc-800"
+                    className="flex-1 gap-2 rounded-lg! border-zinc-800! bg-[radial-gradient(95%_60%_at_50%_75%,#18181b_0%,#27272a_100%)]! px-4! py-2.5! text-sm! text-white shadow-none! active:rotate-0"
                   >
                     <RegisterIcon />
                     {webinarScheduleContent.registerLabel}
-                  </button>
-                  <a
+                  </CandyButton>
+                  <CandyButton
                     href={whatsappUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-emerald-600 bg-emerald-600 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-emerald-700"
+                    className="flex-1 gap-2 rounded-lg! border-emerald-700! bg-[radial-gradient(95%_60%_at_50%_75%,#047857_0%,#059669_100%)]! px-4! py-2.5! text-sm! text-white shadow-none! active:rotate-0 after:via-white/40"
                   >
                     <WhatsAppIcon />
                     {webinarScheduleContent.whatsappLabel}
-                  </a>
+                  </CandyButton>
                 </div>
               )}
             </div>

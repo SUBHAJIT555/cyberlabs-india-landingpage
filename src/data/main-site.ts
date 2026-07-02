@@ -1,5 +1,9 @@
 import { CONTACT } from "@/data/contact-info";
 import { WHATSAPP_URL } from "@/data/site-contact";
+import {
+  bootcamps,
+  flagshipProgramCards,
+} from "@/data/generated/main-website-catalog";
 
 export const MAIN_SITE_URL = "https://cyberlabs-india.com";
 
@@ -78,58 +82,15 @@ export const mainSiteSocialLinks = [
   { label: "WhatsApp", href: WHATSAPP_URL },
 ] as const;
 
-export const mainSiteFlagshipPrograms = [
-  {
-    slug: "master-the-modern-underworld-cybercrime-dark-web-and-crypto-investigations",
-    title:
-      "Master the Modern Underworld: Cybercrime, Dark Web & Crypto Investigations",
-    category: "Cybercrime Investigation",
-    duration: "145 Hours",
-  },
-  {
-    slug: "defend-digital-platforms-at-scale-platform-identity-and-abuse-defense-engineering",
-    title:
-      "Defend Digital Platforms at Scale: Platform, Identity & Abuse Defense Engineering",
-    category: "Platform Security & Trust & Safety",
-    duration: "145 Hours",
-  },
-  {
-    slug: "build-complete-cyber-capability-full-stack-cyber-defense-and-offensive-security",
-    title: "From Foundations to Operations: Cybersecurity Practitioner Program",
-    category: "Full-Stack Cybersecurity",
-    duration: "450 Hours",
-  },
-] as const;
+export const mainSiteFlagshipPrograms = flagshipProgramCards.map((program) => ({
+  slug: program.slug,
+  title: program.title,
+  category: program.category,
+  duration: program.duration,
+}));
 
-export const mainSiteBootcamps = [
-  {
-    slug: "dark-web-intelligence-covert-cyber-investigations",
-    title: "Dark Web Intelligence & Covert Cyber Investigations",
-    duration: "30 Hours",
-  },
-  {
-    slug: "advanced-threat-hunting-adversary-detection",
-    title: "Advanced Threat Hunting & Adversary Detection",
-    duration: "28 Hours",
-  },
-  {
-    slug: "detection-engineering-adversary-analytics",
-    title: "Detection Engineering & Adversary Analytics",
-    duration: "28 Hours",
-  },
-  {
-    slug: "ai-security-adversarial-ai-operations",
-    title: "AI Security & Adversarial AI Operations",
-    duration: "30 Hours",
-  },
-  {
-    slug: "ai-powered-security-operations-center",
-    title: "AI-Powered Security Operations Center (SOC)",
-    duration: "30 Hours",
-  },
-  {
-    slug: "digital-intelligence-collection-analysis-osint-webint",
-    title: "Digital Intelligence Collection & Analysis (OSINT/WEBINT)",
-    duration: "30 Hours",
-  },
-] as const;
+export const mainSiteBootcamps = bootcamps.map((bootcamp) => ({
+  slug: bootcamp.slug,
+  title: bootcamp.title,
+  duration: bootcamp.duration,
+}));

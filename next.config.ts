@@ -12,6 +12,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        protocol: "https",
+        hostname: "cyberlabs-india.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.cyberlabs-india.com",
+      },
     ],
   },
 };

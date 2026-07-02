@@ -7,6 +7,8 @@ import { CareerBenefitsSection } from "@/components/landing/sections/CareerBenef
 import { WebinarTopicsSection } from "@/components/landing/sections/WebinarTopicsSection";
 import { WhoShouldAttendSection } from "@/components/landing/sections/WhoShouldAttendSection";
 import { WebinarScheduleSection } from "@/components/landing/sections/WebinarScheduleSection";
+import { EliteBootcampsSection } from "@/components/landing/sections/EliteBootcampsSection";
+import { FlagshipProgramsSection } from "@/components/landing/sections/FlagshipProgramsSection";
 import { WhyCyberlabsSection } from "@/components/landing/sections/WhyCyberlabsSection";
 import { WhyChooseCTASection } from "@/components/landing/sections/CTASection";
 import { FooterSection } from "@/components/landing/sections/FooterSection";
@@ -19,6 +21,8 @@ export default function Home() {
         <HeroSection />
         <WebinarInsightsSection />
         <WebinarScheduleSection />
+        <EliteBootcampsSection />
+        <FlagshipProgramsSection />
         <WhyAttendSection />
         <LearnFromProsSection />
         <CareerBenefitsSection />

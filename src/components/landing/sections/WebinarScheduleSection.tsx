@@ -5,13 +5,14 @@ import { cn } from "@/lib/utils";
 import { TimelineContent } from "@/components/ui/timeline-animation";
 import ShinyText from "@/components/ui/ShinyText";
 import GradientText from "@/components/ui/GradientText";
+import { CandyButton, candyWhiteSurfaceClass } from "@/components/ui/candy-button";
 import { WebinarDetailsModal } from "@/components/landing/WebinarDetailsModal";
 import { useWebinarRegistration } from "@/context/webinar-registration";
 import {
   upcomingWebinars,
   webinarScheduleContent,
   type WebinarSession,
-} from "@/data/webinar-schedule";
+} from "@/data/generated/webinar-schedule";
 import {
   buildWebinarWhatsappUrl,
   extractFocusText,
@@ -147,24 +148,24 @@ function SessionActions({
 
   return (
     <div className="flex w-full flex-col gap-2" onClick={onActionClick}>
-      <button
+      <CandyButton
         type="button"
         onClick={() => openRegistration(webinar)}
-        className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-zinc-900 bg-zinc-900 px-3 py-2.5 text-sm font-medium text-white transition hover:bg-zinc-800 cursor-pointer"
+        className="w-full gap-2 rounded-lg! border-zinc-800! bg-[radial-gradient(95%_60%_at_50%_75%,#18181b_0%,#27272a_100%)]! px-3! py-2.5! text-sm! text-white shadow-none! active:rotate-0"
       >
         <RegisterIcon />
         {webinarScheduleContent.registerLabel}
-      </button>
+      </CandyButton>
 
-      <a
+      <CandyButton
         href={whatsappUrl}
         target="_blank"
         rel="noreferrer"
-        className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-emerald-600 bg-emerald-600 px-3 py-2.5 text-sm font-medium text-white transition hover:bg-emerald-700"
+        className="w-full gap-2 rounded-lg! border-emerald-700! bg-[radial-gradient(95%_60%_at_50%_75%,#047857_0%,#059669_100%)]! px-3! py-2.5! text-sm! text-white shadow-none! active:rotate-0 after:via-white/40"
       >
         <WhatsAppIcon />
         {webinarScheduleContent.whatsappLabel}
-      </a>
+      </CandyButton>
     </div>
   );
 }
@@ -207,19 +208,19 @@ function SessionRow({
         <div className="flex items-center gap-3 md:self-center md:py-5">
           <div
             className={cn(
-              "flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded-2xl border border-dotted border-zinc-200 text-center",
+              "relative flex h-16 w-16 shrink-0 flex-col items-center justify-center overflow-hidden rounded-xl text-center",
               isPast
-                ? "bg-zinc-100 text-zinc-400"
-                : "bg-white text-zinc-900 shadow-sm",
+                ? "border border-zinc-200 bg-zinc-100 text-zinc-400"
+                : cn(candyWhiteSurfaceClass, "text-zinc-900"),
             )}
           >
-            <span className="text-[10px] font-semibold uppercase tracking-[0.14em]">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.14em]">
               {shortDate.month}
             </span>
-            <span className="text-xl font-semibold leading-none">
+            <span className="text-xl font-bold leading-none">
               {shortDate.day}
             </span>
-            <span className="mt-0.5 text-[10px] font-medium text-zinc-500">
+            <span className="mt-0.5 text-[11px] font-semibold text-red-600">
               {shortDate.weekday}
             </span>
           </div>
@@ -340,7 +341,7 @@ export function WebinarScheduleSection() {
     <section
       id="webinars"
       ref={timelineRef}
-      className=" px-4 py-16 md:py-24"
+      className=" px-4 py-10 md:py-14"
     >
       <div className="mx-auto max-w-7xl">
         <TimelineContent

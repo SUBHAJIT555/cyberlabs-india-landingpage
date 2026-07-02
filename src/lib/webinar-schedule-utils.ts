@@ -69,7 +69,7 @@ export function isWebinarRegistrationAvailable(webinar: WebinarSession): boolean
 }
 
 export function getUpcomingWebinars(
-  sessions: WebinarSession[] = upcomingWebinars,
+  sessions: readonly WebinarSession[] = upcomingWebinars,
 ): WebinarSession[] {
   return sessions
     .filter(isWebinarRegistrationAvailable)
