@@ -21,13 +21,12 @@ import { ShinyButton } from "@/components/ui/shiny-button";
 import { YouTubeIcon } from "@/components/ui/YouTubeIcon";
 import { CONTACT } from "@/data/contact-info";
 import {
-  mainSiteBootcamps,
-  mainSiteFlagshipPrograms,
   mainSiteLegalLinks,
   mainSiteNavigation,
   mainSiteSocialLinks,
   mainSiteUrl,
 } from "@/data/main-site";
+import { useMainSiteData } from "@/context/main-site-data";
 import { cn } from "@/lib/cn";
 import { crosshatchBgStyle } from "@/lib/crosshatch-bg";
 import { useLenis } from "lenis/react";
@@ -43,6 +42,19 @@ const drawerSocialIcons = {
 } as const;
 
 export function LandingNavbar() {
+  const { catalog } = useMainSiteData();
+  const mainSiteFlagshipPrograms = catalog.flagshipProgramCards.map((program) => ({
+    slug: program.slug,
+    title: program.title,
+    category: program.category,
+    duration: program.duration,
+  }));
+  const mainSiteBootcamps = catalog.bootcamps.map((bootcamp) => ({
+    slug: bootcamp.slug,
+    title: bootcamp.title,
+    duration: bootcamp.duration,
+  }));
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isCommandOpen, setIsCommandOpen] = useState(false);

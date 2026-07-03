@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { useRef, type KeyboardEvent, type MouseEvent } from "react";
-import type { FlagshipProgramCard } from "@/data/generated/main-website-catalog";
+import type { FlagshipProgramCard } from "@/types/main-site-catalog";
 import { crosshatchBgStyle } from "@/lib/crosshatch-bg";
 import { resolveCatalogAsset } from "@/lib/main-site-assets";
 import { mainSiteUrl } from "@/data/main-site";

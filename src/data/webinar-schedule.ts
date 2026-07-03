@@ -1,17 +1,10 @@
 /**
- * Webinar schedule synced from the main CYBERLABS website.
- * Run `yarn sync:main-site` to refresh from ../cyberlabs-india-mainwebsite-latest
+ * Webinar schedule types — live data is fetched from the main website at runtime.
  */
 export type {
   WebinarSpeaker,
   WebinarSession,
+  WebinarScheduleContent,
   BackgroundOption,
-} from "@/data/generated/webinar-schedule";
-
-export {
-  defaultWebinarSpeakers,
-  webinarScheduleContent,
-  backgroundOptions,
-  upcomingWebinars,
-  webinarWhatsappNumber,
-} from "@/data/generated/webinar-schedule";
+  MainSiteWebinarSchedule,
+} from "@/types/webinar-schedule";

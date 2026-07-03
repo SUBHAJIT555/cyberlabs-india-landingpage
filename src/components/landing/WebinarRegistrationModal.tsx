@@ -7,10 +7,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import GradientText from "@/components/ui/GradientText";
 import { CandyButton } from "@/components/ui/candy-button";
-import {
-  backgroundOptions,
-  type WebinarSession,
-} from "@/data/webinar-schedule";
+import type { WebinarSession } from "@/types/webinar-schedule";
+import { useMainSiteData } from "@/context/main-site-data";
 import {
   formatPreferredCallDeadline,
   formatWebinarDate,
@@ -192,6 +190,8 @@ export function WebinarRegistrationModal({
   webinar,
   onClose,
 }: WebinarRegistrationModalProps) {
+  const { webinar: webinarData } = useMainSiteData();
+  const { backgroundOptions, upcomingWebinars: allWebinars } = webinarData;
   const isMobile = useIsMobile();
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -213,7 +213,10 @@ export function WebinarRegistrationModal({
   const background = watch("background");
   const showOtherBackground = background === "Other";
 
-  const upcomingWebinars = useMemo(() => getUpcomingWebinars(), []);
+  const upcomingWebinars = useMemo(
+    () => getUpcomingWebinars(allWebinars),
+    [allWebinars],
+  );
 
   const activeWebinar = useMemo(
     () =>

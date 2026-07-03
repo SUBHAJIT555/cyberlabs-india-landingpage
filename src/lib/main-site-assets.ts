@@ -9,6 +9,8 @@ export function resolveMainSiteAsset(path: string): string {
 
 export function resolveCatalogAsset(path: string): string {
   if (!path) return "";
+  if (path.startsWith("http://") || path.startsWith("https://")) return path;
+  if (path.startsWith("/landing-catalog/")) return mainSiteUrl(path);
   if (path.startsWith("/synced-from-main-site/")) return path;
   return resolveMainSiteAsset(path);
 }

@@ -4,8 +4,10 @@ import Image from "next/image";
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import { TimelineContent } from "@/components/ui/timeline-animation";
+import { CandyButton } from "@/components/ui/candy-button";
 import ShinyText from "@/components/ui/ShinyText";
 import GradientText from "@/components/ui/GradientText";
+import { mainSiteUrl } from "@/data/main-site";
 
 const PROS_IMAGE ="/images/Img-04.webp";
 
@@ -322,7 +324,7 @@ export function LearnFromProsSection() {
             >
               <span
                 aria-hidden
-                className="flex shrink-0 items-center justify-center text-zinc-600"
+                className="flex shrink-0 items-center justify-center text-blue-600"
               >
                 {area.icon}
               </span>
@@ -384,16 +386,55 @@ export function LearnFromProsSection() {
           </div>
         </div>
 
-        {/* Closing statement */}
         <TimelineContent
-          as="p"
+          as="div"
           animationNum={7}
           timelineRef={timelineRef}
           customVariants={revealVariants}
-          className="mx-auto mt-8 max-w-3xl text-center text-lg font-medium leading-relaxed text-zinc-800 md:mt-10 md:text-2xl"
+          className="relative mt-10 overflow-hidden border border-zinc-200 border-dashed bg-white px-6 py-12 text-center md:mt-12 md:py-16"
         >
-          This allows us to provide practical industry insight rather than
-          generic career advice.
+          <div
+            aria-hidden
+            className="absolute inset-0 z-0"
+            style={{
+              background:
+                "linear-gradient(to bottom, var(--background) 0%, var(--background) 50%, rgba(255,255,255,0) 100%), radial-gradient(ellipse at 50% 120%, #a1a1aa 0%, var(--background) 80%)",
+              opacity: 0.75,
+            }}
+          >
+            <div
+              style={{
+                WebkitMaskImage:
+                  "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 70%)",
+                backgroundImage:
+                  "repeating-conic-gradient(from 0deg at 50% 100%, #71717a 0deg, #71717a 2deg, transparent 2deg, transparent 10deg)",
+                bottom: "-20%",
+                height: "100%",
+                left: "50%",
+                maskImage:
+                  "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 100%)",
+                opacity: 0.2,
+                pointerEvents: "none",
+                position: "absolute",
+                transform: "translateX(-50%)",
+                width: "200%",
+              }}
+            />
+          </div>
+          <p className="relative z-10 mx-auto mb-4 max-w-3xl text-xl font-semibold leading-relaxed text-blue-600 md:text-3xl">
+            This allows us to provide practical industry insight rather than
+            generic career advice.
+          </p>
+     
+          <CandyButton
+            href={mainSiteUrl("/leadership-and-faculty/")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative z-10 w-full rounded-lg! border-zinc-800! bg-[radial-gradient(95%_60%_at_50%_75%,#18181b_0%,#27272a_100%)]! px-6! py-3! text-sm! text-white shadow-none! active:rotate-0 sm:w-auto"
+          >
+            Meet Our Leadership & Faculty
+          </CandyButton>
+          
         </TimelineContent>
       </div>
     </section>

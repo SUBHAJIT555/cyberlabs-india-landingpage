@@ -1,11 +1,8 @@
 import { CONTACT } from "@/data/contact-info";
 import { WHATSAPP_URL } from "@/data/site-contact";
-import {
-  bootcamps,
-  flagshipProgramCards,
-} from "@/data/generated/main-website-catalog";
 
-export const MAIN_SITE_URL = "https://cyberlabs-india.com";
+export const MAIN_SITE_URL =
+  process.env.NEXT_PUBLIC_MAIN_SITE_URL ?? "https://cyberlabs-india.com";
 
 export function mainSiteUrl(path: string): string {
   const normalized = path.startsWith("/") ? path : `/${path}`;
@@ -81,16 +78,3 @@ export const mainSiteSocialLinks = [
   },
   { label: "WhatsApp", href: WHATSAPP_URL },
 ] as const;
-
-export const mainSiteFlagshipPrograms = flagshipProgramCards.map((program) => ({
-  slug: program.slug,
-  title: program.title,
-  category: program.category,
-  duration: program.duration,
-}));
-
-export const mainSiteBootcamps = bootcamps.map((bootcamp) => ({
-  slug: bootcamp.slug,
-  title: bootcamp.title,
-  duration: bootcamp.duration,
-}));

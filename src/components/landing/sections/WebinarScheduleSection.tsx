@@ -8,11 +8,8 @@ import GradientText from "@/components/ui/GradientText";
 import { CandyButton, candyWhiteSurfaceClass } from "@/components/ui/candy-button";
 import { WebinarDetailsModal } from "@/components/landing/WebinarDetailsModal";
 import { useWebinarRegistration } from "@/context/webinar-registration";
-import {
-  upcomingWebinars,
-  webinarScheduleContent,
-  type WebinarSession,
-} from "@/data/generated/webinar-schedule";
+import type { WebinarSession } from "@/types/webinar-schedule";
+import { useMainSiteData } from "@/context/main-site-data";
 import {
   buildWebinarWhatsappUrl,
   extractFocusText,
@@ -51,6 +48,8 @@ function WebinarDetailsBlock({
   webinar: WebinarSession;
   isPast: boolean;
 }) {
+  const { webinar: webinarData } = useMainSiteData();
+  const { webinarScheduleContent } = webinarData;
   const { topicsLabel, speakersLabel } = webinarScheduleContent;
   const { main, focus } = splitWebinarTopic(webinar.topic);
   const focusText = extractFocusText(focus);
@@ -127,10 +126,12 @@ function SessionActions({
   webinar: WebinarSession;
   onActionClick: (event: React.MouseEvent) => void;
 }) {
+  const { webinar: webinarData } = useMainSiteData();
+  const { webinarScheduleContent, webinarWhatsappNumber } = webinarData;
   const { openRegistration } = useWebinarRegistration();
   const isPast = isWebinarPast(webinar);
   const canRegister = isWebinarRegistrationAvailable(webinar);
-  const whatsappUrl = buildWebinarWhatsappUrl(webinar);
+  const whatsappUrl = buildWebinarWhatsappUrl(webinar, webinarWhatsappNumber);
 
   if (isPast || !canRegister) {
     return (
@@ -177,6 +178,8 @@ function SessionRow({
   webinar: WebinarSession;
   onSelect: (webinar: WebinarSession) => void;
 }) {
+  const { webinar: webinarData } = useMainSiteData();
+  const { webinarScheduleContent } = webinarData;
   const isPast = isWebinarPast(webinar);
   const shortDate = formatWebinarShortDate(webinar.scheduledAt);
   const columns = webinarScheduleContent.tableColumns;
@@ -319,6 +322,8 @@ function WhatsAppIcon() {
 }
 
 export function WebinarScheduleSection() {
+  const { webinar } = useMainSiteData();
+  const { upcomingWebinars, webinarScheduleContent, webinarWhatsappNumber } = webinar;
   const timelineRef = useRef<HTMLDivElement>(null);
   const [detailsWebinar, setDetailsWebinar] = useState<WebinarSession | null>(
     null,

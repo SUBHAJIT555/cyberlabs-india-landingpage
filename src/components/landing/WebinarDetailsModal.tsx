@@ -5,10 +5,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import GradientText from "@/components/ui/GradientText";
 import { CandyButton } from "@/components/ui/candy-button";
-import {
-  webinarScheduleContent,
-  type WebinarSession,
-} from "@/data/webinar-schedule";
+import type { WebinarSession } from "@/types/webinar-schedule";
+import { useMainSiteData } from "@/context/main-site-data";
 import {
   buildWebinarWhatsappUrl,
   extractFocusText,
@@ -172,11 +170,13 @@ function WebinarDetailsModalPanel({
   onClose: () => void;
   isMobile: boolean;
 }) {
+  const { webinar: webinarData } = useMainSiteData();
+  const { webinarScheduleContent, webinarWhatsappNumber } = webinarData;
   const { openRegistration } = useWebinarRegistration();
   const isPast = isWebinarPast(webinar);
   const canRegister = isWebinarRegistrationAvailable(webinar);
   const shortDate = formatWebinarShortDate(webinar.scheduledAt);
-  const whatsappUrl = buildWebinarWhatsappUrl(webinar);
+  const whatsappUrl = buildWebinarWhatsappUrl(webinar, webinarWhatsappNumber);
   const { topicsLabel, speakersLabel } = webinarScheduleContent;
   const { main, focus } = splitWebinarTopic(webinar.topic);
   const focusText = extractFocusText(focus);

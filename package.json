@@ -4,8 +4,6 @@
   "private": true,
   "scripts": {
     "sync:main-site": "node scripts/sync-main-website-catalog.mjs",
-    "predev": "node scripts/sync-main-website-catalog.mjs",
-    "prebuild": "node scripts/sync-main-website-catalog.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

@@ -17,8 +17,12 @@ const nextConfig: NextConfig = {
         hostname: "cyberlabs-india.com",
       },
       {
-        protocol: "https",
-        hostname: "www.cyberlabs-india.com",
+        protocol: "http",
+        hostname: "localhost",
+      },
+      {
+        protocol: "http",
+        hostname: "127.0.0.1",
       },
     ],
   },

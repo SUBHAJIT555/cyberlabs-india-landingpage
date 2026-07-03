@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ClientProviders } from "@/components/providers/ClientProviders";
+import { fetchMainSiteLandingData } from "@/lib/fetch-main-site-data";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -24,11 +25,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const landingData = await fetchMainSiteLandingData();
+
   return (
     <html
       lang="en"
@@ -38,7 +41,7 @@ export default function RootLayout({
         suppressHydrationWarning
         className="min-h-full flex flex-col bg-white font-sans text-zinc-900"
       >
-        <ClientProviders>{children}</ClientProviders>
+        <ClientProviders landingData={landingData}>{children}</ClientProviders>
       </body>
     </html>
   );

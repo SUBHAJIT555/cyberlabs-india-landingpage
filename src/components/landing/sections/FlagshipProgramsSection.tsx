@@ -14,11 +14,8 @@ import {
   landingSectionHeadingClass,
 } from "@/components/ui/landing-section";
 import { FlagshipProgramCard } from "@/components/landing/cards/FlagshipProgramCard";
-import {
-  flagshipProgramCards,
-  getFlagshipProgramImage,
-  flagshipProgramIllustration,
-} from "@/data/generated/main-website-catalog";
+import { useMainSiteData } from "@/context/main-site-data";
+import { getFlagshipProgramImage } from "@/types/main-site-catalog";
 
 const HIGHLIGHTS = [
   "145–450 Hour Programs",
@@ -27,6 +24,8 @@ const HIGHLIGHTS = [
 ] as const;
 
 export function FlagshipProgramsSection() {
+  const { catalog } = useMainSiteData();
+  const { flagshipProgramCards, flagshipProgramIllustration } = catalog;
   const timelineRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -164,7 +163,7 @@ export function FlagshipProgramsSection() {
             <FlagshipProgramCard
               key={program.id}
               program={program}
-              image={getFlagshipProgramImage(program.slug)}
+              image={getFlagshipProgramImage(catalog, program.slug)}
               index={index}
             />
           ))}

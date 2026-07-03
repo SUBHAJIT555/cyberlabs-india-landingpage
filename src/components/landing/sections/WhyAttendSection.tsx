@@ -4,42 +4,50 @@ import Image from "next/image";
 import { useRef } from "react";
 import { TimelineContent } from "@/components/ui/timeline-animation";
 import { FeatureCard } from "@/components/ui/feature-card";
+import { CandyButton } from "@/components/ui/candy-button";
 import ShinyText from "@/components/ui/ShinyText";
 import GradientText from "@/components/ui/GradientText";
+import { mainSiteUrl } from "@/data/main-site";
+import { useWebinarRegistration } from "@/context/webinar-registration";
 
 const WHY_IMAGE ="/images/Img-03.webp";
 
+const ICON_CLASS = "h-8 w-8 text-blue-600";
+
 const differentiators = [
-  "Most cybersecurity webinars focus on tools.",
-  "Some focus on certifications.",
-  "Others focus on teaching a few technical concepts.",
+  "Most cyber training platforms focus on tools or certifications alone.",
+  "Some offer generic courses without real operator perspective.",
+  "Few connect free webinars, elite bootcamps, and flagship programs in one place.",
 ];
 
 const benefits = [
-  { icon: <CompassIcon />, text: "Where the cybersecurity industry is heading" },
   {
-    icon: <BuildingSkyscraperIcon />,
-    text: "What multinational organizations are actually looking for",
+    icon: <TimelineEventPlusIcon className={ICON_CLASS} />,
+    text: "Free live webinars with insights from real cybersecurity operators",
   },
   {
-    icon: <GitBranchIcon />,
-    text: "Which cybersecurity specializations are growing fastest",
+    icon: <CompassIcon className={ICON_CLASS} />,
+    text: "Career guidance and industry clarity before you commit to a program",
   },
   {
-    icon: <TimelineEventPlusIcon />,
-    text: "What skills will matter over the next 5–10 years",
+    icon: <RocketIcon className={ICON_CLASS} />,
+    text: "Elite bootcamps: 30–50 hour intensives in fast-growing specializations",
   },
   {
-    icon: <RobotFaceIcon />,
-    text: "How AI is transforming cybersecurity careers",
+    icon: <GitBranchIcon className={ICON_CLASS} />,
+    text: "Hands-on bootcamp skills employers hire for — beyond certificates",
   },
   {
-    icon: <RocketIcon />,
-    text: "How to position yourself for future opportunities",
+    icon: <BuildingSkyscraperIcon className={ICON_CLASS} />,
+    text: "Flagship programs: 145–450 hours of deep, career-defining training",
+  },
+  {
+    icon: <RobotFaceIcon className={ICON_CLASS} />,
+    text: "Full pathways from fundamentals to advanced offensive & defensive expertise",
   },
 ];
 
-function CompassIcon() {
+function CompassIcon({ className }: { className?: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -49,6 +57,7 @@ function CompassIcon() {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
+      className={className}
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <path d="M8 16l2 -6l6 -2l-2 6l-6 2" />
@@ -61,7 +70,7 @@ function CompassIcon() {
   );
 }
 
-function BuildingSkyscraperIcon() {
+function BuildingSkyscraperIcon({ className }: { className?: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -71,6 +80,7 @@ function BuildingSkyscraperIcon() {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
+      className={className}
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <path d="M3 21l18 0" />
@@ -84,7 +94,7 @@ function BuildingSkyscraperIcon() {
   );
 }
 
-function GitBranchIcon() {
+function GitBranchIcon({ className }: { className?: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -94,6 +104,7 @@ function GitBranchIcon() {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
+      className={className}
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <path d="M5 18a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
@@ -106,7 +117,7 @@ function GitBranchIcon() {
   );
 }
 
-function TimelineEventPlusIcon() {
+function TimelineEventPlusIcon({ className }: { className?: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -116,6 +127,7 @@ function TimelineEventPlusIcon() {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
+      className={className}
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <path d="M10 20a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
@@ -128,7 +140,7 @@ function TimelineEventPlusIcon() {
   );
 }
 
-function RobotFaceIcon() {
+function RobotFaceIcon({ className }: { className?: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -138,6 +150,7 @@ function RobotFaceIcon() {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
+      className={className}
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <path d="M6 5h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2" />
@@ -150,7 +163,7 @@ function RobotFaceIcon() {
   );
 }
 
-function RocketIcon() {
+function RocketIcon({ className }: { className?: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -160,6 +173,7 @@ function RocketIcon() {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
+      className={className}
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <path d="M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3" />
@@ -188,6 +202,7 @@ const revealVariants = {
 
 export function WhyAttendSection() {
   const timelineRef = useRef<HTMLDivElement>(null);
+  const { openRegistration } = useWebinarRegistration();
 
   return (
     <section id="why" ref={timelineRef} className="bg-white px-4 py-16 md:py-24">
@@ -223,7 +238,7 @@ export function WhyAttendSection() {
               className="mt-4 text-pretty"
             >
               <ShinyText
-                text="Why Attend a CYBERLABS Webinar?"
+                text="Why Explore CYBERLABS Programs?"
                 className="text-2xl font-semibold leading-tight sm:text-3xl md:text-4xl"
                 color="#3f3f46"
                 shineColor="#18181b"
@@ -256,7 +271,7 @@ export function WhyAttendSection() {
               customVariants={revealVariants}
               className="mt-5 text-lg font-semibold text-zinc-900 md:text-xl"
             >
-              CYBERLABS webinars are different.
+              CYBERLABS is different.
             </TimelineContent>
 
             <TimelineContent
@@ -266,7 +281,8 @@ export function WhyAttendSection() {
               customVariants={revealVariants}
               className="mt-2 text-sm text-zinc-600 md:text-base"
             >
-              Our webinars are designed to help you understand:
+              Whether you start with a free webinar, an elite bootcamp, or a
+              flagship program, we help you:
             </TimelineContent>
           </div>
 
@@ -279,7 +295,7 @@ export function WhyAttendSection() {
           >
             <Image
               src={WHY_IMAGE}
-              alt="Cybersecurity professionals collaborating in a webinar session"
+              alt="Cybersecurity professionals exploring webinars, bootcamps, and flagship programs"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover transition duration-700 group-hover:scale-[1.03]"
@@ -301,7 +317,7 @@ export function WhyAttendSection() {
             >
               <FeatureCard
                 feature={{ icon: benefit.icon, title: benefit.text }}
-                className="h-full border transition-colors hover:bg-zinc-50/70"
+                className="h-full border transition-colors hover:bg-zinc-50/70 [&_svg]:text-blue-600"
               />
             </TimelineContent>
           ))}
@@ -356,8 +372,25 @@ export function WhyAttendSection() {
             </GradientText>
           </p>
           <p className="relative z-10 mt-3 text-2xl font-semibold text-zinc-900 md:text-4xl">
-            Help You Make Better Career Decisions.
+            Help You Build a Real Cyber Defense Career.
           </p>
+          <div className="relative z-10 mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <CandyButton
+              href={mainSiteUrl("/cyber-defense-programs")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full rounded-lg! border-zinc-400! bg-[radial-gradient(95%_60%_at_50%_75%,#52525b_0%,#71717a_100%)]! px-6! py-3! text-sm! text-white shadow-none! active:rotate-0 sm:w-auto"
+            >
+              Explore Programs & Bootcamps
+            </CandyButton>
+            <CandyButton
+              type="button"
+              onClick={() => openRegistration()}
+              className="w-full rounded-lg! border-zinc-800! bg-[radial-gradient(95%_60%_at_50%_75%,#18181b_0%,#27272a_100%)]! px-6! py-3! text-sm! text-white shadow-none! active:rotate-0 sm:w-auto"
+            >
+              Register for Webinar
+            </CandyButton>
+          </div>
         </TimelineContent>
       </div>
     </section>

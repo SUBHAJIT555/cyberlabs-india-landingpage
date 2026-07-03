@@ -14,10 +14,7 @@ import {
   landingSectionHeadingClass,
 } from "@/components/ui/landing-section";
 import { EliteBootcampCard } from "@/components/landing/cards/EliteBootcampCard";
-import {
-  bootcamps,
-  eliteBootcampIllustration,
-} from "@/data/generated/main-website-catalog";
+import { useMainSiteData } from "@/context/main-site-data";
 
 const HIGHLIGHTS = [
   "30–50 Hour Programs",
@@ -26,6 +23,8 @@ const HIGHLIGHTS = [
 ] as const;
 
 export function EliteBootcampsSection() {
+  const { catalog } = useMainSiteData();
+  const { bootcamps, eliteBootcampIllustration } = catalog;
   const timelineRef = useRef<HTMLDivElement>(null);
 
   return (

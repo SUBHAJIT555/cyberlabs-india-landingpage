@@ -1,8 +1,5 @@
-import {
-  upcomingWebinars,
-  webinarWhatsappNumber,
-  type WebinarSession,
-} from "@/data/webinar-schedule";
+import type { WebinarSession } from "@/types/webinar-schedule";
+import { WHATSAPP_NUMBER } from "@/data/site-contact";
 
 const IST_TIMEZONE = "Asia/Kolkata";
 
@@ -69,7 +66,7 @@ export function isWebinarRegistrationAvailable(webinar: WebinarSession): boolean
 }
 
 export function getUpcomingWebinars(
-  sessions: readonly WebinarSession[] = upcomingWebinars,
+  sessions: readonly WebinarSession[],
 ): WebinarSession[] {
   return sessions
     .filter(isWebinarRegistrationAvailable)
@@ -113,8 +110,11 @@ export function formatWebinarSpeakers(
     .join(", ");
 }
 
-export function buildWebinarWhatsappUrl(webinar: WebinarSession): string {
-  const number = webinarWhatsappNumber.replace(/\D/g, "");
+export function buildWebinarWhatsappUrl(
+  webinar: WebinarSession,
+  whatsappNumber: string = WHATSAPP_NUMBER,
+): string {
+  const number = whatsappNumber.replace(/\D/g, "");
   const date = formatWebinarDate(webinar.scheduledAt);
   const time = formatWebinarTime(webinar.scheduledAt);
   const speakers = webinar.speakers
