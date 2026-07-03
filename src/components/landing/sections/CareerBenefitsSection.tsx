@@ -4,8 +4,10 @@ import { useRef } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { TimelineContent } from "@/components/ui/timeline-animation";
+import { CandyButton } from "@/components/ui/candy-button";
 import ShinyText from "@/components/ui/ShinyText";
 import GradientText from "@/components/ui/GradientText";
+import { mainSiteUrl } from "@/data/main-site";
 
 const careerBenefits = [
   "Position yourself for promotions and leadership opportunities",
@@ -317,7 +319,7 @@ export function CareerBenefitsSection() {
           className="mt-4 text-pretty"
         >
           <ShinyText
-            text="How These Webinars Can Benefit Your Career"
+            text="How CYBERLABS Programs Can Advance Your Career"
             className="text-2xl font-semibold leading-tight tracking-tight sm:text-3xl md:text-4xl"
             color="#3f3f46"
             shineColor="#18181b"
@@ -333,9 +335,10 @@ export function CareerBenefitsSection() {
           customVariants={revealVariants}
           className="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-600 md:text-base"
         >
-          The most successful cybersecurity professionals continuously develop
-          new skills and adapt to emerging technologies, threats, and industry
-          requirements.
+          CYBERLABS brings together free webinars, elite bootcamps, and
+          flagship cyber defense programs — so you can start with career
+          clarity, build specialized skills, and grow into advanced roles at
+          your own pace.
         </TimelineContent>
 
         <TimelineContent
@@ -345,9 +348,9 @@ export function CareerBenefitsSection() {
           customVariants={revealVariants}
           className="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-600 md:text-base"
         >
-          Much like doctors, engineers, and other highly specialized
-          professionals, cybersecurity practitioners must constantly update
-          their knowledge to remain relevant.
+          Guided by active practitioners and leadership with real operational
+          experience, our pathway focuses on practical capability — not generic
+          advice or certifications alone.
         </TimelineContent>
 
         <TimelineContent
@@ -357,8 +360,8 @@ export function CareerBenefitsSection() {
           customVariants={revealVariants}
           className="mt-6 text-base font-semibold text-zinc-900 md:text-lg"
         >
-          Understanding industry trends and emerging specializations can help
-          you:
+          Whether you attend a webinar, join an elite bootcamp, or enroll in a
+          flagship program, CYBERLABS helps you:
         </TimelineContent>
 
         <SplitChecklist items={careerBenefits} timelineRef={timelineRef} />
@@ -368,14 +371,14 @@ export function CareerBenefitsSection() {
           
         </div>
 
-        {/* Block 2 — From Industry Insight to Professional Growth */}
+        {/* Block 2 — Bootcamps & flagship cyber defense programs */}
         <TimelineContent
           as="div"
           animationNum={1}
           timelineRef={timelineRef}
           customVariants={revealVariants}
         >
-          <Eyebrow>Elite Boot Camps</Eyebrow>
+          <Eyebrow>Cyber Defense Programs</Eyebrow>
         </TimelineContent>
 
         <TimelineContent
@@ -386,7 +389,7 @@ export function CareerBenefitsSection() {
           className="mt-4 text-pretty"
         >
           <ShinyText
-            text="From Industry Insight to Professional Growth"
+            text="From Elite Bootcamps to Flagship Cyber Defense Programs"
             className="text-2xl font-semibold leading-tight tracking-tight sm:text-3xl md:text-4xl"
             color="#3f3f46"
             shineColor="#18181b"
@@ -402,14 +405,33 @@ export function CareerBenefitsSection() {
           customVariants={revealVariants}
           className="mt-4 max-w-3xl text-sm leading-relaxed text-zinc-600 md:text-base"
         >
-          During these webinars, you will also discover how CYBERLABS Elite Boot
-          Camps help professionals build specialized expertise in areas such as:
+          CYBERLABS offers two pathways for professionals ready to move beyond
+          awareness into real capability:{" "}
+          <span className="font-medium text-zinc-800">
+            30–50 hour Elite Bootcamps
+          </span>{" "}
+          for focused specialization, and{" "}
+          <span className="font-medium text-zinc-800">
+            145–450 hour Flagship Cyber Defense Programs
+          </span>{" "}
+          for deep, career-defining expertise.
         </TimelineContent>
 
-        {/* Boot camp areas as bricks */}
+        <TimelineContent
+          as="p"
+          animationNum={4}
+          timelineRef={timelineRef}
+          customVariants={revealVariants}
+          className="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-600 md:text-base"
+        >
+          Together, they help you build specialized skills across domains such
+          as:
+        </TimelineContent>
+
+        {/* Program specialization areas */}
         <TimelineContent
           as="div"
-          animationNum={4}
+          animationNum={5}
           timelineRef={timelineRef}
           customVariants={revealVariants}
           className="mt-6 flex flex-wrap gap-2 sm:gap-2.5"
@@ -423,7 +445,7 @@ export function CareerBenefitsSection() {
             >
               <span
                 aria-hidden
-                className="flex shrink-0 items-center justify-center text-zinc-600"
+                className="flex shrink-0 items-center justify-center text-blue-600"
               >
                 {area.icon}
               </span>
@@ -434,27 +456,66 @@ export function CareerBenefitsSection() {
 
         <TimelineContent
           as="p"
-          animationNum={5}
+          animationNum={6}
           timelineRef={timelineRef}
           customVariants={revealVariants}
           className="mt-10 max-w-3xl text-base font-semibold text-zinc-900 md:text-lg"
         >
-          Our 30–50 Hour Elite Boot Camps are designed specifically for working
+          Whether you choose a focused elite bootcamp or a comprehensive
+          flagship cyber defense program, CYBERLABS is designed for working
           professionals seeking to:
         </TimelineContent>
 
         <SplitChecklist items={bootCampGoals} timelineRef={timelineRef} />
 
-        {/* Closing statement */}
         <TimelineContent
-          as="p"
+          as="div"
           animationNum={12}
           timelineRef={timelineRef}
           customVariants={revealVariants}
-          className="mx-auto mt-14 max-w-3xl text-center text-lg font-medium leading-relaxed text-zinc-800 md:mt-16 md:text-2xl"
+          className="relative mt-14 overflow-hidden border border-zinc-200 border-dashed bg-white px-6 py-12 text-center md:mt-16 md:py-16"
         >
-          Organizations are increasingly looking for professionals with
-          practical skills and operational capability—not simply certifications.
+          <div
+            aria-hidden
+            className="absolute inset-0 z-0"
+            style={{
+              background:
+                "linear-gradient(to bottom, var(--background) 0%, var(--background) 50%, rgba(255,255,255,0) 100%), radial-gradient(ellipse at 50% 120%, #a1a1aa 0%, var(--background) 80%)",
+              opacity: 0.75,
+            }}
+          >
+            <div
+              style={{
+                WebkitMaskImage:
+                  "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 70%)",
+                backgroundImage:
+                  "repeating-conic-gradient(from 0deg at 50% 100%, #71717a 0deg, #71717a 2deg, transparent 2deg, transparent 10deg)",
+                bottom: "-20%",
+                height: "100%",
+                left: "50%",
+                maskImage:
+                  "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 100%)",
+                opacity: 0.2,
+                pointerEvents: "none",
+                position: "absolute",
+                transform: "translateX(-50%)",
+                width: "200%",
+              }}
+            />
+          </div>
+          <p className="relative z-10 mx-auto mb-6 max-w-3xl text-xl font-semibold leading-relaxed text-blue-600 md:text-3xl">
+            Organizations are increasingly looking for professionals with
+            practical skills and operational capability-not simply
+            certifications.
+          </p>
+          <CandyButton
+            href={mainSiteUrl("/certification-and-evaluation-framework/")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative z-10 w-full rounded-lg! border-zinc-800! bg-[radial-gradient(95%_60%_at_50%_75%,#18181b_0%,#27272a_100%)]! px-6! py-3! text-sm! text-white shadow-none! active:rotate-0 sm:w-auto"
+          >
+            Certification & Evaluation Framework
+          </CandyButton>
         </TimelineContent>
       </div>
     </section>

@@ -2,9 +2,10 @@
 
 import { useRef } from "react";
 import { TimelineContent } from "@/components/ui/timeline-animation";
-import { ShinyButton } from "@/components/ui/shiny-button";
-import GradientText from "@/components/ui/GradientText";
+import { CandyButton } from "@/components/ui/candy-button";
 import ShinyText from "@/components/ui/ShinyText";
+import GradientText from "@/components/ui/GradientText";
+import { mainSiteUrl } from "@/data/main-site";
 import { useWebinarRegistration } from "@/context/webinar-registration";
 
 const revealVariants = {
@@ -74,39 +75,34 @@ export function WhyChooseCTASection() {
           <BannerBackground />
 
           <div className="relative z-10 mx-auto max-w-3xl">
-            <h3 className="text-2xl font-bold text-zinc-900 md:text-4xl">
-              Stop Guessing. Start Building.
+            <h3 className="text-pretty">
+              <ShinyText
+                text="Build Your Cyber Defense Career With CYBERLABS"
+                className="text-3xl font-semibold leading-tight md:text-5xl"
+                color="#3f3f46"
+                shineColor="#18181b"
+                speed={3}
+                spread={120}
+              />
             </h3>
+      
 
-            <p className="mt-5 text-sm leading-relaxed text-zinc-600 md:text-base font-medium">
-              The future belongs to professionals who understand where
-              technology, security, and digital risk are heading.
-            </p>
-            <p className="mt-3 text-sm leading-relaxed text-zinc-600 md:text-base">
-              Join a FREE CYBERLABS Career Guidance &amp; Industry Insight
-              Webinar and gain the clarity, confidence, and industry
-              understanding needed to make informed career decisions.
-            </p>
-
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-              <ShinyButton
+            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <CandyButton
+                type="button"
                 onClick={() => openRegistration()}
-                className="shiny-cta w-full rounded-2xl! text-sm! shadow-lg! shadow-zinc-800/20! sm:w-auto"
+                className="w-full rounded-lg! border-zinc-800! bg-[radial-gradient(95%_60%_at_50%_75%,#18181b_0%,#27272a_100%)]! px-6! py-3! text-sm! text-white shadow-none! active:rotate-0 sm:w-auto"
               >
-                REGISTER FOR THE NEXT WEBINAR
-              </ShinyButton>
-              <ShinyButton
-                onClick={() =>
-                  window.open(
-                    "https://cyberlabs-india.com/",
-                    "_blank",
-                    "noopener,noreferrer",
-                  )
-                }
-                className="shiny-cta--light w-full rounded-2xl! text-sm! shadow-lg! shadow-zinc-800/20! sm:w-auto"
+                Register for Free Webinar Now
+              </CandyButton>
+              <CandyButton
+                href={mainSiteUrl("/cyber-defense-programs")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full rounded-lg! border-zinc-400! bg-[radial-gradient(95%_60%_at_50%_75%,#52525b_0%,#71717a_100%)]! px-6! py-3! text-sm! text-white shadow-none! active:rotate-0 sm:w-auto"
               >
-                VISIT OUR MAIN WEBSITE
-              </ShinyButton>
+                Explore Programs & Bootcamps
+              </CandyButton>
             </div>
 
             <div className="mt-5 flex justify-center">
@@ -124,7 +120,7 @@ export function WhyChooseCTASection() {
                 CYBERLABS INDIA
               </p>
               <GradientText
-                className="mt-2 text-sm leading-relaxed md:text-base font-bold!"
+                className="mt-2 text-sm leading-relaxed font-bold! md:text-base"
                 colors={["#52525b", "#2563eb", "#3f3f46", "#1d4ed8", "#52525b"]}
                 animationSpeed={4}
                 direction="horizontal"

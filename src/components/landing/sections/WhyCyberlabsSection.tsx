@@ -38,22 +38,37 @@ const revealVariants = {
 
 function PanelBackground() {
   return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+    <div
+      aria-hidden
+      className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
+    >
       <div
+        className="absolute inset-0"
         style={{
-          WebkitMaskImage: "linear-gradient(to top, #000 0%, transparent 70%)",
-          backgroundImage:
-            "linear-gradient(90deg, #d4d4d8 1px, transparent 1px)",
-          backgroundSize: "8px 100%",
-          height: "100%",
-          left: "0",
-          maskImage: "linear-gradient(to top, #000 0%, transparent 70%)",
-          opacity: 0.4,
-          position: "absolute",
-          top: "0",
-          width: "100%",
+          background:
+            "linear-gradient(to bottom, var(--background) 0%, var(--background) 50%, rgba(255,255,255,0) 100%), radial-gradient(ellipse at 50% 150%, #a1a1aa 0%, var(--background) 75%)",
+          opacity: 0.7,
         }}
-      />
+      >
+        <div
+          style={{
+            WebkitMaskImage:
+              "linear-gradient(to bottom, rgba(0,0,0,0) 15%, rgba(0,0,0,0.35) 100%)",
+            backgroundImage:
+              "repeating-conic-gradient(from 0deg at 50% 100%, #71717a 0deg, #71717a 1deg, transparent 1deg, transparent 4deg)",
+            bottom: "-5%",
+            height: "100%",
+            left: "50%",
+            maskImage:
+              "linear-gradient(to bottom, rgba(0,0,0,0) 15%, rgba(0,0,0,0.35) 100%)",
+            opacity: 0.2,
+            pointerEvents: "none",
+            position: "absolute",
+            transform: "translateX(-50%)",
+            width: "300%",
+          }}
+        />
+      </div>
     </div>
   );
 }
