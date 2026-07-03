@@ -1,0 +1,12 @@
+export { HeroSection } from "@/components/landing/sections/HeroSection";
+export { WebinarInsightsSection } from "@/components/landing/sections/WebinarInsightsSection";
+export { WebinarScheduleSection } from "@/components/landing/sections/WebinarScheduleSection";
+export { EliteBootcampsSection } from "@/components/landing/sections/EliteBootcampsSection";
+export { FlagshipProgramsSection } from "@/components/landing/sections/FlagshipProgramsSection";
+export { WhyAttendSection } from "@/components/landing/sections/WhyAttendSection";
+export { LearnFromProsSection } from "@/components/landing/sections/LearnFromProsSection";
+export { CareerBenefitsSection } from "@/components/landing/sections/CareerBenefitsSection";
+export { WhoShouldAttendSection } from "@/components/landing/sections/WhoShouldAttendSection";
+export { WhyCyberlabsSection } from "@/components/landing/sections/WhyCyberlabsSection";
+export { WhyChooseCTASection } from "@/components/landing/sections/CTASection";
+export { FooterSection } from "@/components/landing/sections/FooterSection";

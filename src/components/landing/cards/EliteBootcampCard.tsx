@@ -120,6 +120,7 @@ export function EliteBootcampCard({ bootcamp, index }: EliteBootcampCardProps) {
             alt={bootcamp.title}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            loading={index < 4 ? "eager" : "lazy"}
             className="object-cover transition-transform duration-500 group-hover:scale-[1.05]"
           />
         ) : null}

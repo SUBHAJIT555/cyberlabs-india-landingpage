@@ -175,11 +175,18 @@ export function LandingNavbar() {
             <Image
               src="/logo/cyberlabs-logo.svg"
               alt="CYBERLABS INDIA"
+              width={144}
+              height={32}
+              priority
+              className="h-8 w-auto md:hidden"
+            />
+            <Image
+              src="/logo/cyberlabs-logo.svg"
+              alt="CYBERLABS INDIA"
               width={180}
               height={40}
               priority
-              className="h-8 w-auto md:h-10"
-              style={{ width: "auto" }}
+              className="hidden h-10 w-auto md:block"
             />
           </a>
 
@@ -288,10 +295,9 @@ export function LandingNavbar() {
             <Image
               src="/logo/cyberlabs-logo.svg"
               alt="CYBERLABS INDIA"
-              width={160}
-              height={36}
+              width={142}
+              height={32}
               className="h-8 w-auto"
-              style={{ width: "auto" }}
             />
           </a>
         </DrawerHeader>
